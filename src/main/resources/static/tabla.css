@@ -1,0 +1,53 @@
+.table-container {
+    margin-top: 20px;
+    overflow-x: auto; /* Para desplazar la tabla en pantallas pequeñas */
+}
+
+.availability-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.availability-table th,
+.availability-table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+.availability-table th {
+    background-color: #006699;
+    color: #ffffff;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.availability-table td {
+    background-color: #f9f9f9;
+}
+
+.availability-table tr:nth-child(even) td {
+    background-color: #f2f2f2;
+}
+
+.availability-table td strong {
+    font-weight: bold;
+}
+
+/* Ajuste para pantallas pequeñas */
+@media (max-width: 768px) {
+    .availability-table {
+        font-size: 14px;
+    }
+
+    .availability-table th,
+    .availability-table td {
+        padding: 8px;
+    }
+}

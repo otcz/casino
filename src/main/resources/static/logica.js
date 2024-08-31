@@ -1,22 +1,29 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Selecciona todos los enlaces de navegación y las secciones
     const navLinks = document.querySelectorAll('.nav-link');
     const sections = document.querySelectorAll('.section');
 
+    // Agrega un event listener a cada enlace de navegación
     navLinks.forEach(link => {
         link.addEventListener('click', (e) => {
-            e.preventDefault();
+            e.preventDefault(); // Previene la acción por defecto del enlace
 
-            // Eliminar la clase 'active' de todas las secciones
+            // Elimina la clase 'active' de todas las secciones
             sections.forEach(section => section.classList.remove('active'));
 
-            // Agregar la clase 'active' a la sección correspondiente
+            // Obtiene el ID de la sección objetivo desde el atributo 'href' del enlace
             const targetId = link.getAttribute('href').substring(1);
-            document.getElementById(targetId).classList.add('active');
+            const targetSection = document.getElementById(targetId);
 
-            // Eliminar la clase 'active' de todos los enlaces
+            // Verifica si la sección objetivo existe antes de agregar la clase 'active'
+            if (targetSection) {
+                targetSection.classList.add('active');
+            }
+
+            // Elimina la clase 'active' de todos los enlaces
             navLinks.forEach(nav => nav.classList.remove('active'));
 
-            // Agregar la clase 'active' al enlace clicado
+            // Agrega la clase 'active' al enlace clicado
             link.classList.add('active');
         });
     });
