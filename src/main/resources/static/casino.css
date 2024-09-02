@@ -41,7 +41,7 @@ body {
 }
 
 .brand-img {
-    width: 150px;
+    width: 100px;
     height: auto;
     margin-bottom: 10px;
     border-radius: 10px;
@@ -315,3 +315,17 @@ body {
     font-size: 1.5rem; /* Ajusta el tamaño del icono aquí */
     margin-right: 15px;
 }
+
+.header #user-name {
+    font-size: 1rem; /* Tamaño del texto del nombre del usuario */
+}
+
+.header i {
+    font-size: 1.5rem; /* Tamaño del icono del usuario */
+}
+
+.header h1 {
+    font-size: 1rem; /* Tamaño del texto del nombre del usuario */
+    margin: 0; /* Elimina el margen del h1 */
+}
+
