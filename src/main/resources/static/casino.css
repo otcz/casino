@@ -311,3 +311,7 @@ body {
 .meal ul li i {
     margin-right: 10px;
 }
+.header-container i.small-icon {
+    font-size: 1.5rem; /* Ajusta el tamaño del icono aquí */
+    margin-right: 15px;
+}

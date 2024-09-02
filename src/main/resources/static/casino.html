@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recurso Educativo</title>
+    <link rel="stylesheet" href="casino.css">
+    <!-- Incluye Font Awesome para los íconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="logica.js" defer></script>
+    <link rel="stylesheet" href="tabla.css"> <!-- Añadido defer para cargar el script después del contenido -->
+</head>
+<body>
+<!-- Header -->
+<header class="header">
+    <div class="header-content">
+        <i class="fas fa-user-circle fa-3x"></i> <!-- Icono de usuario en lugar del logo -->
+        <h1>Bienvenido, <span id="user-name"></span></h1>
+    </div>
+</header>
+
+<!-- Contenido de la página -->
+<div class="container">
+    <div class="sidebar">
+        <div class="brand">
+            <img src="logo.png" alt="Logo" class="brand-img">
+        </div>
+        <nav class="nav">
+            <ul>
+                <li><a href="#menu" class="nav-link active"><i class="fas fa-bars"></i> <span class="nav-link-text">Menú</span></a></li>
+                <li><a href="#rooms" class="nav-link"><i class="fas fa-door-open"></i> <span class="nav-link-text">Estancias</span></a></li>
+                <li><a href="#store" class="nav-link"><i class="fas fa-store"></i> <span class="nav-link-text">Tienda</span></a></li>
+            </ul>
+        </nav>
+    </div>
+    <main class="main-content">
+        <div class="section active" id="menu">
+            <h1>Planificación Semanal de Comidas</h1>
+            <p>Seleccione el día de la semana para ver el menú planificado.</p>
+
+            <div class="card-container">
+
+                <!-- Tarjetas para los días de la semana -->
+                <!-- Lunes -->
+                <div class="card">
+                    <i class="fas fa-calendar-day card-icon"></i>
+                    <div class="card-content">
+                        <h2>Lunes</h2>
+                        <div class="meal-plan">
+                            <div class="meal">
+                                <h3>Desayuno</h3>
+                                <ul>
+                                    <li><i class="fas fa-egg"></i> Huevos</li>
+                                    <li><i class="fas fa-bread-slice"></i> Pan</li>
+                                    <li><i class="fas fa-glass-whiskey"></i> Jugo</li>
+                                </ul>
+                            </div>
+                            <div class="meal">
+                                <h3>Almuerzo</h3>
+                                <ul>
+                                    <li><i class="fas fa-drumstick-bite"></i> Pollo</li>
+                                    <li><i class="fas fa-carrot"></i> Carne</li>
+                                    <li><i class="fas fa-glass-whiskey"></i> Jugo</li>
+                                </ul>
+                            </div>
+                            <div class="meal">
+                                <h3>Cena</h3>
+                                <ul>
+                                    <li><i class="fas fa-pizza-slice"></i> Pizza</li>
+                                    <li><i class="fas fa-burger"></i> Pollo</li>
+                                    <li><i class="fas fa-glass-whiskey"></i> Jugo</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Repite el bloque de tarjeta para otros días de la semana -->
+                <div class="card">
+                    <i class="fas fa-calendar-day card-icon"></i>
+                    <div class="card-content">
+                        <h2>Martes</h2>
+                        <div class="meal-plan">
+                            <div class="meal">
+                                <h3>Desayuno</h3>
+                                <ul>
+                                    <li><i class="fas fa-egg"></i> Tostadas</li>
+                                    <li><i class="fas fa-bread-slice"></i> Jugo</li>
+                                    <li><i class="fas fa-glass-whiskey"></i> Frutas</li>
+                                </ul>
+                            </div>
+                            <div class="meal">
+                                <h3>Almuerzo</h3>
+                                <ul>
+                                    <li><i class="fas fa-drumstick-bite"></i> Sandwich de Pollo</li>
+                                    <li><i class="fas fa-carrot"></i> Papas</li>
+                                    <li><i class="fas fa-glass-whiskey"></i> Ensalada</li>
+                                </ul>
+                            </div>
+                            <div class="meal">
+                                <h3>Cena</h3>
+                                <ul>
+                                    <li><i class="fas fa-pizza-slice"></i> Pizza</li>
+                                    <li><i class="fas fa-burger"></i> Ensalada</li>
+                                    <li><i class="fas fa-glass-whiskey"></i> Fruta</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <i class="fas fa-calendar-day card-icon"></i>
+                    <div class="card-content">
+                        <h2>Miércoles</h2>
+                        <div class="meal-plan">
+                            <div class="meal">
+                                <h3>Desayuno</h3>
+                                <ul>
+                                    <li><i class="fas fa-egg"></i> Yogur con granola</li>
+                                    <li><i class="fas fa-bread-slice"></i> Frutas</li>
+                                    <li><i class="fas fa-glass-whiskey"></i> Tostadas</li>
+                                </ul>
+                            </div>
+                            <div class="meal">
+                                <h3>Almuerzo</h3>
+                                <ul>
+                                    <li><i class="fas fa-drumstick-bite"></i> Pasta con salsa de tomate</li>
+                                    <li><i class="fas fa-carrot"></i> Pan de ajo</li>
+                                    <li><i class="fas fa-glass-whiskey"></i> Ensalada</li>
+                                </ul>
+                            </div>
+                            <div class="meal">
+                                <h3>Cena</h3>
+                                <ul>
+                                    <li><i class="fas fa-pizza-slice"></i> Ensalada de frutas</li>
+                                    <li><i class="fas fa-burger"></i> Yogur</li>
+                                    <li><i class="fas fa-cocktail"></i> Frutos secos</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <i class="fas fa-calendar-day card-icon"></i>
+                    <div class="card-content">
+                        <h2>Jueves</h2>
+                        <div class="meal-plan">
+                            <div class="meal">
+                                <h3>Desayuno</h3>
+                                <ul>
+                                    <li><i class="fas fa-egg"></i> Huevos revueltos</li>
+                                    <li><i class="fas fa-bread-slice"></i> Tostadas</li>
+                                    <li><i class="fas fa-glass-whiskey"></i> Fruta</li>
+                                </ul>
+                            </div>
+                            <div class="meal">
+                                <h3>Almuerzo</h3>
+                                <ul>
+                                    <li><i class="fas fa-drumstick-bite"></i> Arroz con pollo</li>
+                                    <li><i class="fas fa-carrot"></i> Verduras</li>
+                                    <li><i class="fas fa-glass-whiskey"></i> Ensalada</li>
+                                </ul>
+                            </div>
+                            <div class="meal">
+                                <h3>Cena</h3>
+                                <ul>
+                                    <li><i class="fas fa-pizza-slice"></i> Sándwich de atún</li>
+                                    <li><i class="fas fa-burger"></i> Batido</li>
+                                    <li><i class="fas fa-cocktail"></i> Fruta</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <i class="fas fa-calendar-day card-icon"></i>
+                    <div class="card-content">
+                        <h2>Viernes</h2>
+                        <div class="meal-plan">
+                            <div class="meal">
+                                <h3>Desayuno</h3>
+                                <ul>
+                                    <li><i class="fas fa-egg"></i> Croissants</li>
+                                    <li><i class="fas fa-bread-slice"></i> Café</li>
+                                    <li><i class="fas fa-glass-whiskey"></i> Fruta</li>
+                                </ul>
+                            </div>
+                            <div class="meal">
+                                <h3>Almuerzo</h3>
+                                <ul>
+                                    <li><i class="fas fa-drumstick-bite"></i> Sushi</li>
+                                    <li><i class="fas fa-carrot"></i> Ensalada</li>
+                                    <li><i class="fas fa-glass-whiskey"></i> Pan</li>
+                                </ul>
+                            </div>
+                            <div class="meal">
+                                <h3>Cena</h3>
+                                <ul>
+                                    <li><i class="fas fa-pizza-slice"></i> Hamburguesas</li>
+                                    <li><i class="fas fa-burger"></i> Papas fritas</li>
+                                    <li><i class="fas fa-cocktail"></i> Bebida</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <i class="fas fa-calendar-day card-icon"></i>
+                    <div class="card-content">
+                        <h2>Sábado</h2>
+                        <div class="meal-plan">
+                            <div class="meal">
+                                <h3>Desayuno</h3>
+                                <ul>
+                                    <li><i class="fas fa-egg"></i> Muffins</li>
+                                    <li><i class="fas fa-bread-slice"></i> Café</li>
+                                    <li><i class="fas fa-glass-whiskey"></i> Fruta</li>
+                                </ul>
+                            </div>
+                            <div class="meal">
+                                <h3>Almuerzo</h3>
+                                <ul>
+                                    <li><i class="fas fa-drumstick-bite"></i> Carne asada</li>
+                                    <li><i class="fas fa-carrot"></i> Vegetales</li>
+                                    <li><i class="fas fa-glass-whiskey"></i> Papas</li>
+                                </ul>
+                            </div>
+                            <div class="meal">
+                                <h3>Cena</h3>
+                                <ul>
+                                    <li><i class="fas fa-pizza-slice"></i> Pizza</li>
+                                    <li><i class="fas fa-burger"></i> Fruta</li>
+                                    <li><i class="fas fa-cocktail"></i> Bebida</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <i class="fas fa-calendar-day card-icon"></i>
+                    <div class="card-content">
+                        <h2>Domingo</h2>
+                        <div class="meal-plan">
+                            <div class="meal">
+                                <h3>Desayuno</h3>
+                                <ul>
+                                    <li><i class="fas fa-egg"></i> Omelette</li>
+                                    <li><i class="fas fa-bread-slice"></i> Tostadas</li>
+                                    <li><i class="fas fa-glass-whiskey"></i> Jugo de naranja</li>
+                                </ul>
+                            </div>
+                            <div class="meal">
+                                <h3>Almuerzo</h3>
+                                <ul>
+                                    <li><i class="fas fa-drumstick-bite"></i> Barbacoa</li>
+                                    <li><i class="fas fa-carrot"></i> Maíz</li>
+                                    <li><i class="fas fa-glass-whiskey"></i> Ensalada</li>
+                                </ul>
+                            </div>
+                            <div class="meal">
+                                <h3>Cena</h3>
+                                <ul>
+                                    <li><i class="fas fa-pizza-slice"></i> Pasta</li>
+                                    <li><i class="fas fa-burger"></i> Pan</li>
+                                    <li><i class="fas fa-cocktail"></i> Postre</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+
+        <!-- Secciones adicionales como 'Estancias' y 'Tienda' -->
+        <div class="section" id="rooms">
+            <h1>Control de Estancias</h1>
+            <p>Resumen de las estancias del mes de</p>
+
+            <div class="table-container">
+                <!-- Semana 1 -->
+                <h2>SEMANA 1</h2>
+                <table class="availability-table">
+                    <thead>
+                    <tr>
+                        <th></th>
+                        <th>Lunes</th>
+                        <th>Martes</th>
+                        <th>Miércoles</th>
+                        <th>Jueves</th>
+                        <th>Viernes</th>
+                        <th>Sábado</th>
+                        <th>Domingo</th>
+                        <th>TOTAL SEMANA</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>Desayuno</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>7</td>
+                    </tr>
+                    <tr>
+                        <td>Almuerzo</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>7</td>
+                    </tr>
+                    <tr>
+                        <td>Cena</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>7</td>
+                    </tr>
+                    <tr>
+                        <td><strong>TOTAL ESTANCIAS</strong></td>
+                        <td><strong>3</strong></td>
+                        <td><strong>3</strong></td>
+                        <td><strong>3</strong></td>
+                        <td><strong>3</strong></td>
+                        <td><strong>3</strong></td>
+                        <td><strong>3</strong></td>
+                        <td><strong>3</strong></td>
+                        <td><strong>21</strong></td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <!-- Semana 2 -->
+                <h2>SEMANA 2</h2>
+                <table class="availability-table">
+                    <thead>
+                    <tr>
+                        <th></th>
+                        <th>Lunes</th>
+                        <th>Martes</th>
+                        <th>Miércoles</th>
+                        <th>Jueves</th>
+                        <th>Viernes</th>
+                        <th>Sábado</th>
+                        <th>Domingo</th>
+                        <th>TOTAL SEMANA</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>Desayuno</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>7</td>
+                    </tr>
+                    <tr>
+                        <td>Almuerzo</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>7</td>
+                    </tr>
+                    <tr>
+                        <td>Cena</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>7</td>
+                    </tr>
+                    <tr>
+                        <td><strong>TOTAL ESTANCIAS</strong></td>
+                        <td><strong>3</strong></td>
+                        <td><strong>3</strong></td>
+                        <td><strong>3</strong></td>
+                        <td><strong>3</strong></td>
+                        <td><strong>3</strong></td>
+                        <td><strong>3</strong></td>
+                        <td><strong>3</strong></td>
+                        <td><strong>21</strong></td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <!-- Semana 3 -->
+                <h2>SEMANA 3</h2>
+                <table class="availability-table">
+                    <thead>
+                    <tr>
+                        <th></th>
+                        <th>Lunes</th>
+                        <th>Martes</th>
+                        <th>Miércoles</th>
+                        <th>Jueves</th>
+                        <th>Viernes</th>
+                        <th>Sábado</th>
+                        <th>Domingo</th>
+                        <th>TOTAL SEMANA</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>Desayuno</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>7</td>
+                    </tr>
+                    <tr>
+                        <td>Almuerzo</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>7</td>
+                    </tr>
+                    <tr>
+                        <td>Cena</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>7</td>
+                    </tr>
+                    <tr>
+                        <td><strong>TOTAL ESTANCIAS</strong></td>
+                        <td><strong>3</strong></td>
+                        <td><strong>3</strong></td>
+                        <td><strong>3</strong></td>
+                        <td><strong>3</strong></td>
+                        <td><strong>3</strong></td>
+                        <td><strong>3</strong></td>
+                        <td><strong>3</strong></td>
+                        <td><strong>21</strong></td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <!-- Semana 4 -->
+                <h2>SEMANA 4</h2>
+                <table class="availability-table">
+                    <thead>
+                    <tr>
+                        <th></th>
+                        <th>Lunes</th>
+                        <th>Martes</th>
+                        <th>Miércoles</th>
+                        <th>Jueves</th>
+                        <th>Viernes</th>
+                        <th>Sábado</th>
+                        <th>Domingo</th>
+                        <th>TOTAL SEMANA</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>Desayuno</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>7</td>
+                    </tr>
+                    <tr>
+                        <td>Almuerzo</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>7</td>
+                    </tr>
+                    <tr>
+                        <td>Cena</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>7</td>
+                    </tr>
+                    <tr>
+                        <td><strong>TOTAL ESTANCIAS</strong></td>
+                        <td><strong>3</strong></td>
+                        <td><strong>3</strong></td>
+                        <td><strong>3</strong></td>
+                        <td><strong>3</strong></td>
+                        <td><strong>3</strong></td>
+                        <td><strong>3</strong></td>
+                        <td><strong>3</strong></td>
+                        <td><strong>21</strong></td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <h2>RESUMEN</h2>
+                <table class="availability-table">
+                    <thead>
+                    <tr>
+                        <th>Descripción</th>
+                        <th>Cantidad</th>
+                        <th>Valor Uni</th>
+                        <th>Total</th>
+                        <th>Descripción</th>
+                        <th>Cantidad</th>
+                        <th>Valor Uni</th>
+                        <th>Total</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>TOTAL ESTANCIAS</td>
+                        <td>12</td>
+                        <td>$18,300</td>
+                        <td>$219,600</td>
+                        <td>DOMINGO</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>TOTAL DESAYUNOS EXTRAS</td>
+                        <td>0</td>
+                        <td>$70,000</td>
+                        <td>$0</td>
+                        <td>DESAYUNOS</td>
+                        <td>4</td>
+                        <td>$8,000</td>
+                        <td>$32,000</td>
+                    </tr>
+                    <tr>
+                        <td>TOTAL ALMUERZOS EXTRAS</td>
+                        <td>0</td>
+                        <td>$10,000</td>
+                        <td>$0</td>
+                        <td>ALMUERZOS</td>
+                        <td>4</td>
+                        <td>$25,000</td>
+                        <td>$100,000</td>
+                    </tr>
+                    <tr>
+                        <td>TOTAL CENA EXTRAS</td>
+                        <td>0</td>
+                        <td>$7,000</td>
+                        <td>$0</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td><strong>NETO A PAGAR</strong></td>
+                        <td></td>
+                        <td></td>
+                        <td><strong>$351,600</strong></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td><strong>$132,000</strong></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <h1>  . </h1>
+                <h1>  .</h1>
+            </div>
+        </div>
+        <div class="section" id="store">
+            <h1>Tienda</h1>
+            <p>Proceso de desarrollo.</p>
+        </div>
+    </main>
+</div>
+
+<footer class="footer">
+    &copy; 2024 Recurso Educativo Digital
+</footer>
+<script src="casino.js"></script>
+</body>
+</html>

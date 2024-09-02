@@ -1,3 +1,4 @@
+console.log(sessionStorage)
 document.addEventListener('DOMContentLoaded', () => {
     // Selecciona todos los enlaces de navegación y las secciones
     const navLinks = document.querySelectorAll('.nav-link');
@@ -27,4 +28,15 @@ document.addEventListener('DOMContentLoaded', () => {
             link.classList.add('active');
         });
     });
+    console.log(sessionStorage)
+    // Obtiene el nombre del usuario desde sessionStorage
+    const userName = sessionStorage.getItem('userName');
+    const userGreeting = document.getElementById('user-greeting');
+    console.log(sessionStorage)
+
+    if (userName) {
+        userGreeting.textContent = `Hola, ${userName}!`;
+    } else {
+        userGreeting.textContent = 'Hola, visitante!';
+    }
 });
