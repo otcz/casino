@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     const socioDocumento = localStorage.getItem("documento");
 
-    fetch(`/api/comidas/socio/${socioDocumento}`)
+    fetch(`/socios/comida/${socioDocumento}`)
         .then(response => response.json())
         .then(data => {
             console.log(data); // Puedes ver los datos en la consola para verificar

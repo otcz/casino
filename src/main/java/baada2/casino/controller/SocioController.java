@@ -72,7 +72,7 @@ public class SocioController {
     }
 
 
-    @GetMapping("/socio/{documento}")
+    @GetMapping("/comida/{documento}")
     public ResponseEntity<List<ComidaDTO>> obtenerComidasPorSocio(@PathVariable String documento) {
         List<ComidaDTO> comidas = comidaService.obtenerComidasPorSocio(documento);
         System.out.println(comidas.toString());
