@@ -56,7 +56,7 @@ public class ComidaService {
         comidaDTO.setValorComida(comidaEntity.getValorComida());
         comidaDTO.setFecha(comidaEntity.getFecha());
         comidaDTO.setPago(comidaEntity.isPago());
-        comidaDTO.setSocioId(comidaEntity.getSocio().getId());
+        comidaDTO.setSocioId(comidaEntity.getSocio().getDocumento());
         return comidaDTO;
     }
 }
