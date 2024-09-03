@@ -8,8 +8,10 @@
     <!-- Incluye Font Awesome para los íconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="logica.js" defer></script>
-    <link rel="stylesheet" href="tabla.css">
-    <script src="estancias.js"></script> <!-- Añadido defer para cargar el script después del contenido -->
+    <link rel="stylesheet" href="casino-tabla.css">
+    <script src="casino-estancias.js"></script>
+
+    <!-- Añadido defer para cargar el script después del contenido -->
 </head>
 <body>
 <!-- Header -->
@@ -28,9 +30,12 @@
         </div>
         <nav class="nav">
             <ul>
-                <li><a href="#menu" class="nav-link active"><i class="fas fa-bars"></i> <span class="nav-link-text">Menú</span></a></li>
-                <li><a href="#rooms" class="nav-link"><i class="fas fa-door-open"></i> <span class="nav-link-text">Estancias</span></a></li>
-                <li><a href="#store" class="nav-link"><i class="fas fa-store"></i> <span class="nav-link-text">Tienda</span></a></li>
+                <li><a href="#menu" class="nav-link active"><i class="fas fa-bars"></i> <span
+                        class="nav-link-text">Menú</span></a></li>
+                <li><a href="#rooms" class="nav-link"><i class="fas fa-door-open"></i> <span class="nav-link-text">Estancias</span></a>
+                </li>
+                <li><a href="#store" class="nav-link"><i class="fas fa-store"></i> <span
+                        class="nav-link-text">Tienda</span></a></li>
             </ul>
         </nav>
     </div>
@@ -273,13 +278,20 @@
             </div>
 
 
-
         </div>
 
         <!-- Secciones adicionales como 'Estancias' y 'Tienda' -->
         <div class="section" id="rooms">
             <h1>Control de Estancias</h1>
-            <p>Resumen de las estancias del mes de</p>
+
+            <div class="month-selector">
+                <p>Resumen de las estancias del mes de</p>
+                <button id="prevMonth" onclick="changeMonth(-1)"><i class="fas fa-chevron-left"></i></button>
+                <span id="currentMonth"></span>
+                <button id="nextMonth" onclick="changeMonth(1)"><i class="fas fa-chevron-right"></i></button>
+            </div>
+
+            <p>El 20 de este mes cae en: <span id="dayOfWeek"></span></p>
 
             <div class="table-container">
                 <!-- Semana 1 -->
@@ -302,46 +314,46 @@
                     <tr>
                         <td>Desayuno</td>
                         <td></td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
+                        <td id="semana1-martes_desayuno">0</td>
+                        <td id="semana1-miercoles_desayuno">0</td>
+                        <td id="semana1-jueves_desayuno">0</td>
+                        <td id="semana1-viernes_desayuno">0</td>
+                        <td id="semana1-sabado_desayuno">0</td>
+                        <td id="semana1-domingo_desayuno">0</td>
+                        <td id="semana1-total_desayuno">0</td>
                     </tr>
                     <tr>
                         <td>Almuerzo</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
+                        <td id="semana1-lunes_almuerzo">0</td>
+                        <td id="semana1-martes_almuerzo">0</td>
+                        <td id="semana1-miercoles_almuerzo">0</td>
+                        <td id="semana1-jueves_almuerzo">0</td>
+                        <td id="semana1-viernes_almuerzo">0</td>
+                        <td id="semana1-sabado_almuerzo">0</td>
+                        <td id="semana1-domingo_almuerzo">0</td>
+                        <td id="semana1-total_almuerzo">0</td>
                     </tr>
                     <tr>
                         <td>Cena</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
+                        <td id="semana1-lunes_cena">0</td>
+                        <td id="semana1-martes_cena">0</td>
+                        <td id="semana1-miercoles_cena">0</td>
+                        <td id="semana1-jueves_cena">0</td>
+                        <td id="semana1-viernes_cena">0</td>
+                        <td id="semana1-sabado_cena">0</td>
+                        <td id="semana1-domingo_cena">0</td>
+                        <td id="semana1-total_cena">0</td>
                     </tr>
                     <tr>
                         <td><strong>TOTAL ESTANCIAS</strong></td>
-                        <td><strong>0</strong></td>
-                        <td><strong>0</strong></td>
-                        <td><strong>0</strong></td>
-                        <td><strong>0</strong></td>
-                        <td><strong>0</strong></td>
-                        <td><strong>0</strong></td>
-                        <td><strong>0</strong></td>
-                        <td><strong>0</strong></td>
+                        <td id="semana1-lunes_total"><strong>0</strong></td>
+                        <td id="semana1-martes_total"><strong>0</strong></td>
+                        <td id="semana1-miercoles_total"><strong>0</strong></td>
+                        <td id="semana1-jueves_total"><strong>0</strong></td>
+                        <td id="semana1-viernes_total"><strong>0</strong></td>
+                        <td id="semana1-sabado_total"><strong>0</strong></td>
+                        <td id="semana1-domingo_total"><strong>0</strong></td>
+                        <td id="semana1-total_semanal"><strong>0</strong></td>
                     </tr>
                     </tbody>
                 </table>
@@ -365,47 +377,47 @@
                     <tbody>
                     <tr>
                         <td>Desayuno</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
+                        <td id="semana2-lunes_desayuno">0</td>
+                        <td id="semana2-martes_desayuno">0</td>
+                        <td id="semana2-miercoles_desayuno">0</td>
+                        <td id="semana2-jueves_desayuno">0</td>
+                        <td id="semana2-viernes_desayuno">0</td>
+                        <td id="semana2-sabado_desayuno">0</td>
+                        <td id="semana2-domingo_desayuno">0</td>
+                        <td id="semana2-total_desayuno">0</td>
                     </tr>
                     <tr>
                         <td>Almuerzo</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
+                        <td id="semana2-lunes_almuerzo">0</td>
+                        <td id="semana2-martes_almuerzo">0</td>
+                        <td id="semana2-miercoles_almuerzo">0</td>
+                        <td id="semana2-jueves_almuerzo">0</td>
+                        <td id="semana2-viernes_almuerzo">0</td>
+                        <td id="semana2-sabado_almuerzo">0</td>
+                        <td id="semana2-domingo_almuerzo">0</td>
+                        <td id="semana2-total_almuerzo">0</td>
                     </tr>
                     <tr>
                         <td>Cena</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
+                        <td id="semana2-lunes_cena">0</td>
+                        <td id="semana2-martes_cena">0</td>
+                        <td id="semana2-miercoles_cena">0</td>
+                        <td id="semana2-jueves_cena">0</td>
+                        <td id="semana2-viernes_cena">0</td>
+                        <td id="semana2-sabado_cena">0</td>
+                        <td id="semana2-domingo_cena">0</td>
+                        <td id="semana2-total_cena">0</td>
                     </tr>
                     <tr>
                         <td><strong>TOTAL ESTANCIAS</strong></td>
-                        <td><strong>0</strong></td>
-                        <td><strong>0</strong></td>
-                        <td><strong>0</strong></td>
-                        <td><strong>0</strong></td>
-                        <td><strong>0</strong></td>
-                        <td><strong>0</strong></td>
-                        <td><strong>0</strong></td>
-                        <td><strong>0</strong></td>
+                        <td id="semana2-lunes_total"><strong>0</strong></td>
+                        <td id="semana2-martes_total"><strong>0</strong></td>
+                        <td id="semana2-miercoles_total"><strong>0</strong></td>
+                        <td id="semana2-jueves_total"><strong>0</strong></td>
+                        <td id="semana2-viernes_total"><strong>0</strong></td>
+                        <td id="semana2-sabado_total"><strong>0</strong></td>
+                        <td id="semana2-domingo_total"><strong>0</strong></td>
+                        <td id="semana2-total_semanal"><strong>0</strong></td>
                     </tr>
                     </tbody>
                 </table>
@@ -429,47 +441,47 @@
                     <tbody>
                     <tr>
                         <td>Desayuno</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
+                        <td id="semana3-lunes_desayuno">0</td>
+                        <td id="semana3-martes_desayuno">0</td>
+                        <td id="semana3-miercoles_desayuno">0</td>
+                        <td id="semana3-jueves_desayuno">0</td>
+                        <td id="semana3-viernes_desayuno">0</td>
+                        <td id="semana3-sabado_desayuno">0</td>
+                        <td id="semana3-domingo_desayuno">0</td>
+                        <td id="semana3-total_desayuno">0</td>
                     </tr>
                     <tr>
                         <td>Almuerzo</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
+                        <td id="semana3-lunes_almuerzo">0</td>
+                        <td id="semana3-martes_almuerzo">0</td>
+                        <td id="semana3-miercoles_almuerzo">0</td>
+                        <td id="semana3-jueves_almuerzo">0</td>
+                        <td id="semana3-viernes_almuerzo">0</td>
+                        <td id="semana3-sabado_almuerzo">0</td>
+                        <td id="semana3-domingo_almuerzo">0</td>
+                        <td id="semana3-total_almuerzo">0</td>
                     </tr>
                     <tr>
                         <td>Cena</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
+                        <td id="semana3-lunes_cena">0</td>
+                        <td id="semana3-martes_cena">0</td>
+                        <td id="semana3-miercoles_cena">0</td>
+                        <td id="semana3-jueves_cena">0</td>
+                        <td id="semana3-viernes_cena">0</td>
+                        <td id="semana3-sabado_cena">0</td>
+                        <td id="semana3-domingo_cena">0</td>
+                        <td id="semana3-total_cena">0</td>
                     </tr>
                     <tr>
                         <td><strong>TOTAL ESTANCIAS</strong></td>
-                        <td><strong>0</strong></td>
-                        <td><strong>0</strong></td>
-                        <td><strong>0</strong></td>
-                        <td><strong>0</strong></td>
-                        <td><strong>0</strong></td>
-                        <td><strong>0</strong></td>
-                        <td><strong>0</strong></td>
-                        <td><strong>0</strong></td>
+                        <td id="semana3-lunes_total"><strong>0</strong></td>
+                        <td id="semana3-martes_total"><strong>0</strong></td>
+                        <td id="semana3-miercoles_total"><strong>0</strong></td>
+                        <td id="semana3-jueves_total"><strong>0</strong></td>
+                        <td id="semana3-viernes_total"><strong>0</strong></td>
+                        <td id="semana3-sabado_total"><strong>0</strong></td>
+                        <td id="semana3-domingo_total"><strong>0</strong></td>
+                        <td id="semana3-total_semanal"><strong>0</strong></td>
                     </tr>
                     </tbody>
                 </table>
@@ -493,47 +505,47 @@
                     <tbody>
                     <tr>
                         <td>Desayuno</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
+                        <td id="semana4-lunes_desayuno">0</td>
+                        <td id="semana4-martes_desayuno">0</td>
+                        <td id="semana4-miercoles_desayuno">0</td>
+                        <td id="semana4-jueves_desayuno">0</td>
+                        <td id="semana4-viernes_desayuno">0</td>
+                        <td id="semana4-sabado_desayuno">0</td>
+                        <td id="semana4-domingo_desayuno">0</td>
+                        <td id="semana4-total_desayuno">0</td>
                     </tr>
                     <tr>
                         <td>Almuerzo</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
+                        <td id="semana4-lunes_almuerzo">0</td>
+                        <td id="semana4-martes_almuerzo">0</td>
+                        <td id="semana4-miercoles_almuerzo">0</td>
+                        <td id="semana4-jueves_almuerzo">0</td>
+                        <td id="semana4-viernes_almuerzo">0</td>
+                        <td id="semana4-sabado_almuerzo">0</td>
+                        <td id="semana4-domingo_almuerzo">0</td>
+                        <td id="semana4-total_almuerzo">0</td>
                     </tr>
                     <tr>
                         <td>Cena</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
+                        <td id="semana4-lunes_cena">0</td>
+                        <td id="semana4-martes_cena">0</td>
+                        <td id="semana4-miercoles_cena">0</td>
+                        <td id="semana4-jueves_cena">0</td>
+                        <td id="semana4-viernes_cena">0</td>
+                        <td id="semana4-sabado_cena">0</td>
+                        <td id="semana4-domingo_cena">0</td>
+                        <td id="semana4-total_cena">0</td>
                     </tr>
                     <tr>
                         <td><strong>TOTAL ESTANCIAS</strong></td>
-                        <td><strong>0</strong></td>
-                        <td><strong>0</strong></td>
-                        <td><strong>0</strong></td>
-                        <td><strong>0</strong></td>
-                        <td><strong>0</strong></td>
-                        <td><strong>0</strong></td>
-                        <td><strong>0</strong></td>
-                        <td><strong>0</strong></td>
+                        <td id="semana4-lunes_total"><strong>0</strong></td>
+                        <td id="semana4-martes_total"><strong>0</strong></td>
+                        <td id="semana4-miercoles_total"><strong>0</strong></td>
+                        <td id="semana4-jueves_total"><strong>0</strong></td>
+                        <td id="semana4-viernes_total"><strong>0</strong></td>
+                        <td id="semana4-sabado_total"><strong>0</strong></td>
+                        <td id="semana4-domingo_total"><strong>0</strong></td>
+                        <td id="semana4-total_semanal"><strong>0</strong></td>
                     </tr>
                     </tbody>
                 </table>
@@ -555,79 +567,71 @@
                     <tbody>
                     <tr>
                         <td>TOTAL ESTANCIAS</td>
-                        <td>0</td>
-                        <td>$0</td>
-                        <td>$0</td>
-                        <td colspan="4" class="bordered">DOMINGO</td>
+                        <td id="total-estancias-cantidad">0</td>
+                        <td id="total-estancias-valor-uni">$0</td>
+                        <td id="total-estancias-total">$0</td>
+                        <td colspan="4" class="bordered" id="domingo">DOMINGO</td>
                     </tr>
                     <tr>
                         <td>TOTAL DESAYUNOS EXTRAS</td>
-                        <td>0</td>
-                        <td>$0</td>
-                        <td>$0</td>
+                        <td id="total-desayunos-extras-cantidad">0</td>
+                        <td id="total-desayunos-extras-valor-uni">$0</td>
+                        <td id="total-desayunos-extras-total">$0</td>
                         <td>DESAYUNOS</td>
-                        <td>4</td>
-                        <td>$0</td>
-                        <td>$0</td>
+                        <td id="desayunos-cantidad">0</td>
+                        <td id="desayunos-valor-uni">$0</td>
+                        <td id="desayunos-total">$0</td>
                     </tr>
                     <tr>
                         <td>TOTAL ALMUERZOS EXTRAS</td>
-                        <td>0</td>
-                        <td>$0</td>
-                        <td>$0</td>
+                        <td id="total-almuerzos-extras-cantidad">0</td>
+                        <td id="total-almuerzos-extras-valor-uni">$0</td>
+                        <td id="total-almuerzos-extras-total">$0</td>
                         <td>ALMUERZOS</td>
-                        <td>4</td>
-                        <td>$0</td>
-                        <td>$0</td>
+                        <td id="almuerzos-cantidad">0</td>
+                        <td id="almuerzos-valor-uni">$0</td>
+                        <td id="almuerzos-total">$0</td>
                     </tr>
                     <tr>
                         <td>TOTAL CENA EXTRAS</td>
-                        <td>0</td>
-                        <td>$0</td>
-                        <td>$0</td>
+                        <td id="total-cena-extras-cantidad">0</td>
+                        <td id="total-cena-extras-valor-uni">$0</td>
+                        <td id="total-cena-extras-total">$0</td>
                         <td>CENA</td>
-                        <td>0</td>
-                        <td>$0</td>
-                        <td>$0</td>
+                        <td id="cena-cantidad">0</td>
+                        <td id="cena-valor-uni">$0</td>
+                        <td id="cena-total">$0</td>
                     </tr>
                     <tr class="bordered-group">
                         <td><strong>ALIMENTACIÓN</strong></td>
-                        <td></td>
-                        <td></td>
-                        <td><strong>$0</strong></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td><strong>$0</strong></td>
+                        <td colspan="6" id="alimentacion-total"><strong>$0</strong></td>
+                        <td><strong id="alimentacion-total-final">$0</strong></td>
                     </tr>
                     <tr>
-                        <td><strong>FUNCIONAMIENTO Y FOMENTOS</strong></td>
+                        <td><strong>FONDO CASINO</strong></td>
+                        <td colspan="6" id="fondo-casino-total"><strong>$0</strong></td>
                         <td></td>
+                    </tr>
+                    <tr>
+                        <td><strong>FONDO HABITACIÓN</strong></td>
+                        <td colspan="6" id="fondo-habitacion-total"><strong>$0</strong></td>
                         <td></td>
-                        <td><strong>$0</strong></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                    </tr>
+                    <tr>
+                        <td><strong>FOMENTO</strong></td>
+                        <td colspan="6" id="fomento-total"><strong>$0</strong></td>
                         <td></td>
                     </tr>
                     <tr>
                         <td><strong>TOTAL A PAGAR MES</strong></td>
-                        <td></td>
-                        <td></td>
-                        <td><strong>$0</strong></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td colspan="7" id="total-pagar-mes"><strong>$0</strong></td>
                     </tr>
                     </tbody>
                 </table>
 
-
-                <h1>  . </h1>
-                <h1>  .</h1>
+                <h1> . </h1>
+                <h1> .</h1>
             </div>
-
 
 
         </div>
@@ -642,5 +646,6 @@
     &copy; 2024 Recurso Educativo Digital
 </footer>
 <script src="casino.js"></script>
+<script src="casino-agrega-dia-semana.js"></script>
 </body>
 </html>

@@ -329,3 +329,23 @@ body {
     margin: 0; /* Elimina el margen del h1 */
 }
 
+.month-selector {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.month-selector button {
+    background-color: #f0f0f0;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.month-selector #currentMonth {
+    font-size: 18px;
+    margin: 0 20px;
+}
+
