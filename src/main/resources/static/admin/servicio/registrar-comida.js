@@ -30,6 +30,7 @@ document.getElementById('form-servicios').addEventListener('submit', function(ev
         .then(response => response.json())
         .then(data => {
             console.log('Comida creada con éxito:', data);
+            alert("RESPUESTA->"+data)
             // Aquí podrías mostrar un mensaje de éxito o redirigir a otra página
         })
         .catch((error) => {
