@@ -30,7 +30,6 @@ document.getElementById("login-form").addEventListener("submit", function(event)
             sessionStorage.setItem('userName', data.nombre); // Asegúrate de que 'nombre' sea la propiedad correcta
             sessionStorage.setItem('documento', data.documento); // Asegúrate de que 'nombre' sea la propiedad correcta
             window.location.href = 'casino.html'; // Cambia esta URL si es necesario
-            console.log(sessionStorage)
         })
         .catch(error => {
             // Mostrar mensaje de error
