@@ -59,4 +59,13 @@ public class ComidaService {
         comidaDTO.setSocioId(comidaEntity.getSocio().getDocumento());
         return comidaDTO;
     }
+
+    public List<ComidaDTO> obtenerComidasPorSocio(String documento) {
+        SocioEntity socio = socioRepository.findByDocumento(documento)
+                .orElseThrow(() -> new RuntimeException("Socio no encontrado con documento: " + documento));
+
+        return comidaRepository.findBySocio(socio).stream()
+                .map(this::mapToDTO)
+                .collect(Collectors.toList());
+    }
 }
