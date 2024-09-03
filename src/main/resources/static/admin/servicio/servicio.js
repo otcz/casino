@@ -20,13 +20,13 @@ document.addEventListener('DOMContentLoaded', function () {
         fechaServicioInput.disabled = !enable;
         habilitarHabitacionCheckbox.disabled = !enable;
         habilitarFomentoCheckbox.disabled = !enable;
+        valorServicioInput.disabled = !enable;  // Habilitar o deshabilitar valor del servicio
         submitBtn.disabled = !enable;
 
         if (!enable) {
             nombreSocioInput.value = '';
             valorHabitacionInput.disabled = true;
             valorFomentoInput.disabled = true;
-            valorServicioInput.value = ''; // Limpiar valor del servicio si se deshabilitan los campos
         }
     }
 
@@ -51,8 +51,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     nombreSocioInput.value = data.nombre;
                     toggleFields(true); // Habilitar campos
 
-                    // Configurar el combobox y el valor del servicio
-                    configurarServicioPorHora();
+                    // Actualizar el valor del servicio al encontrar un socio
                     actualizarValorServicio();
 
                     // Lógica adicional si se habilitan las opciones adicionales
@@ -101,14 +100,14 @@ document.addEventListener('DOMContentLoaded', function () {
         let valor = 0;
 
         if (selectedServicio === '1') { // Desayuno
-            valor = dayOfWeek === 7 ? 8000 : 7000; // 0 es Domingo
+            valor = dayOfWeek === 7 ? 8000 : 7000;
         } else if (selectedServicio === '2') { // Almuerzo
             valor = dayOfWeek === 7 ? 25000 : 10000;
         } else if (selectedServicio === '3') { // Cena
             valor = 7000; // Valor fijo para la cena
         }
 
-        valorServicioInput.value = `$${valor.toLocaleString()}`; // Actualizar el valor del servicio
+        valorServicioInput.value = valor.toLocaleString(); // Actualizar el valor del servicio
     }
 
     // Configurar el combobox y el valor del servicio al cargar la página
