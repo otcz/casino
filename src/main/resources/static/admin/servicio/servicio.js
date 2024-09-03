@@ -107,7 +107,7 @@ document.addEventListener('DOMContentLoaded', function () {
             valor = 7000; // Valor fijo para la cena
         }
         console.log(valor.toLocaleString())
-        valorServicioInput.value = valor.toLocaleString(); // Actualizar el valor del servicio
+        valorServicioInput.value = valor; // Actualizar el valor del servicio
     }
 
     // Configurar el combobox y el valor del servicio al cargar la página
