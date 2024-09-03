@@ -7,7 +7,7 @@ document.getElementById('form-servicios').addEventListener('submit', function(ev
     const valorServicio = document.getElementById('valor-servicio').value;
     const fechaServicio = document.getElementById('fecha-servicio').value;
     const cantidadEstancias = document.getElementById('cantidad-estancias').value;
-    const pago = true; // O el valor que corresponda según tu lógica
+    const pago = false; // O el valor que corresponda según tu lógica
 
     // Crear el objeto ComidaDTO para enviar al backend
     const comidaDTO = {
