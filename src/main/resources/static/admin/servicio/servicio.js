@@ -20,6 +20,7 @@ document.addEventListener('DOMContentLoaded', function () {
         fechaServicioInput.disabled = !enable;
         habilitarHabitacionCheckbox.disabled = !enable;
         habilitarFomentoCheckbox.disabled = !enable;
+        valorServicioInput.disabled = !enable;  // Habilitar o deshabilitar valor del servicio
         submitBtn.disabled = !enable;
 
         if (!enable) {
@@ -49,6 +50,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (data) {
                     nombreSocioInput.value = data.nombre;
                     toggleFields(true); // Habilitar campos
+
+                    // Actualizar el valor del servicio al encontrar un socio
+                    actualizarValorServicio();
 
                     // Lógica adicional si se habilitan las opciones adicionales
                     habilitarHabitacionCheckbox.addEventListener('change', function () {
