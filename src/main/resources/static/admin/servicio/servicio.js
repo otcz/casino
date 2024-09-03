@@ -106,7 +106,7 @@ document.addEventListener('DOMContentLoaded', function () {
         } else if (selectedServicio === '3') { // Cena
             valor = 7000; // Valor fijo para la cena
         }
-
+        console.log(valor.toLocaleString())
         valorServicioInput.value = valor.toLocaleString(); // Actualizar el valor del servicio
     }
 
