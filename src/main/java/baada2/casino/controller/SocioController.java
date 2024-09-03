@@ -54,4 +54,17 @@ public class SocioController {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error al obtener socios", e);
         }
     }
+    @GetMapping("/consultarid")
+    public ResponseEntity<SocioDTO> obtenerSocioPorDocumento(@RequestParam("documento") String documento) {
+        try {
+            SocioDTO socio = socioService.obtenerSocioPorDocumento(documento);
+            if (socio == null) {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND); // No se encontró el socio
+            }
+            return new ResponseEntity<>(socio, HttpStatus.OK);
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error al obtener socio", e);
+        }
+    }
+
 }

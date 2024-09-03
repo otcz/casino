@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Getter
@@ -11,9 +12,10 @@ import java.time.LocalDateTime;
 @ToString
 public class ComidaDTO {
     private Long id;
+    private int cantidad;
     private String claseComida;
     private double valorComida;
-    private LocalDateTime fecha;
+    private LocalDate fecha;
     private boolean pago;
     private Long socioId;
 }

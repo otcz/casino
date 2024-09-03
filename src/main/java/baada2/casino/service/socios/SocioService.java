@@ -51,6 +51,30 @@ public class SocioService {
         return null; // Autenticación fallida
     }
 
+
+    public SocioDTO obtenerSocioPorDocumento(String documento) {
+        Optional<SocioEntity> socioEntityOptional = socioRepository.findByDocumento(documento);
+
+        if (socioEntityOptional.isPresent()) {
+            SocioEntity socioEntity = socioEntityOptional.get();
+            // Aquí debes convertir SocioEntity a SocioDTO. Supongamos que tienes un método de mapeo:
+            return convertirEntidadADTO(socioEntity);
+        } else {
+            return null; // O podrías lanzar una excepción
+        }
+    }
+
+    // Método de mapeo de SocioEntity a SocioDTO
+    private SocioDTO convertirEntidadADTO(SocioEntity socioEntity) {
+        SocioDTO socioDTO = new SocioDTO();
+        socioDTO.setId(socioEntity.getId());
+        socioDTO.setGrado(socioEntity.getGrado());
+        socioDTO.setNombre(socioEntity.getNombre());
+        socioDTO.setEstado(socioEntity.getEstado());
+        socioDTO.setPassword(socioEntity.getPassword());
+        socioDTO.setDocumento(socioEntity.getDocumento());
+        return socioDTO;
+    }
     private SocioDTO mapToDTO(SocioEntity socioEntity) {
         SocioDTO socioDTO = new SocioDTO();
         socioDTO.setId(socioEntity.getId());

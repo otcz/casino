@@ -19,4 +19,5 @@ public class SocioDTO {
     private String estado;
     private Long id;
     private String password;
+
 }

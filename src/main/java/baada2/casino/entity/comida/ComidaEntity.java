@@ -4,7 +4,9 @@ import baada2.casino.entity.socio.SocioEntity;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -26,10 +28,13 @@ public class ComidaEntity {
     private double valorComida;
 
     @Column(name = "fecha", nullable = false)
-    private LocalDateTime fecha;
+    private LocalDate fecha;
 
     @Column(name = "pago", nullable = false)
     private boolean pago;
+
+    @Column(name = "cantidad", nullable = false)
+    private int cantidad;
 
     @ManyToOne
     @JoinColumn(name = "socio_id")

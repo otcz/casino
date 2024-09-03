@@ -1,0 +1,135 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    margin: 0;
+    padding: 20px;
+}
+
+.form-container {
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.form-container h2 {
+    margin-bottom: 20px;
+    color: #006699;
+    text-align: center;
+    text-transform: uppercase;
+    font-family: 'Arial', sans-serif;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+    font-family: 'Arial', sans-serif;
+}
+
+.form-group input[type="number"],
+.form-group input[type="text"],
+.form-group select,
+.form-group input[type="date"] {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    font-size: 16px;
+    font-family: 'Arial', sans-serif;
+}
+
+.form-group input[type="number"]:disabled,
+.form-group input[type="text"]:disabled,
+.form-group input[type="date"]:disabled,
+.form-group select:disabled {
+    background-color: #e9ecef;
+}
+
+.form-group input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+.form-group input[type="checkbox"] + input[type="number"] {
+    margin-top: 10px;
+}
+
+.form-group button {
+    padding: 10px 20px;
+    background-color: #006699;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease;
+    font-family: 'Arial', sans-serif;
+}
+
+.form-group button:hover {
+    background-color: #005580;
+}
+
+.search-group .search-bar {
+    display: flex;
+    align-items: center;
+}
+
+.search-group .search-bar input {
+    flex-grow: 1;
+}
+
+.search-group .search-bar button {
+    margin-left: 10px;
+    padding: 10px 15px;
+    font-size: 16px;
+    background-color: #28a745;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-family: 'Arial', sans-serif;
+}
+
+.search-group .search-bar button:hover {
+    background-color: #218838;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .form-container {
+        padding: 15px;
+    }
+
+    .form-group {
+        flex-direction: column;
+    }
+
+    .form-group input[type="number"],
+    .form-group input[type="text"],
+    .form-group select,
+    .form-group input[type="date"],
+    .form-group button {
+        width: 100%;
+    }
+
+    .search-group .search-bar {
+        flex-direction: column;
+    }
+
+    .search-group .search-bar button {
+        width: 100%;
+        margin-left: 0;
+        margin-top: 10px;
+    }
+}

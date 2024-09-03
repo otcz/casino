@@ -23,6 +23,7 @@ public class ComidaService {
     public ComidaDTO crearComida(ComidaDTO comidaDTO) {
         ComidaEntity comidaEntity = new ComidaEntity();
         comidaEntity.setClaseComida(comidaDTO.getClaseComida());
+        comidaEntity.setCantidad(comidaDTO.getCantidad());
         comidaEntity.setValorComida(comidaDTO.getValorComida());
         comidaEntity.setFecha(comidaDTO.getFecha());
         comidaEntity.setPago(comidaDTO.isPago());
@@ -46,6 +47,7 @@ public class ComidaService {
     private ComidaDTO mapToDTO(ComidaEntity comidaEntity) {
         ComidaDTO comidaDTO = new ComidaDTO();
         comidaDTO.setId(comidaEntity.getId());
+        comidaDTO.setCantidad(comidaEntity.getCantidad());
         comidaDTO.setClaseComida(comidaEntity.getClaseComida());
         comidaDTO.setValorComida(comidaEntity.getValorComida());
         comidaDTO.setFecha(comidaEntity.getFecha());
