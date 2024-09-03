@@ -101,9 +101,9 @@ document.addEventListener('DOMContentLoaded', function () {
         let valor = 0;
 
         if (selectedServicio === '1') { // Desayuno
-            valor = dayOfWeek === 0 ? 8000 : 7000; // 0 es Domingo
+            valor = dayOfWeek === 7 ? 8000 : 7000; // 0 es Domingo
         } else if (selectedServicio === '2') { // Almuerzo
-            valor = dayOfWeek === 0 ? 25000 : 10000;
+            valor = dayOfWeek === 7 ? 25000 : 10000;
         } else if (selectedServicio === '3') { // Cena
             valor = 7000; // Valor fijo para la cena
         }
