@@ -28,6 +28,7 @@ document.getElementById("login-form").addEventListener("submit", function(event)
         .then(data => {
             // Guardar el nombre del socio en sessionStorage y redirigir a casino.html
             sessionStorage.setItem('userName', data.nombre); // Asegúrate de que 'nombre' sea la propiedad correcta
+            sessionStorage.setItem('documento', data.documento); // Asegúrate de que 'nombre' sea la propiedad correcta
             window.location.href = 'casino.html'; // Cambia esta URL si es necesario
             console.log(sessionStorage)
         })
