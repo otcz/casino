@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -21,6 +22,7 @@ public class ComidaService {
     private SocioRepository socioRepository;
 
     public ComidaDTO crearComida(ComidaDTO comidaDTO) {
+        System.out.println(comidaDTO.toString());
         ComidaEntity comidaEntity = new ComidaEntity();
         comidaEntity.setClaseComida(comidaDTO.getClaseComida());
         comidaEntity.setCantidad(comidaDTO.getCantidad());
@@ -28,9 +30,11 @@ public class ComidaService {
         comidaEntity.setFecha(comidaDTO.getFecha());
         comidaEntity.setPago(comidaDTO.isPago());
 
-        SocioEntity socio = socioRepository.findById(comidaDTO.getSocioId())
-                .orElseThrow(() -> new RuntimeException("Socio no encontrado"));
+        // Buscar el socio por documento
+        SocioEntity socio = socioRepository.findByDocumento(comidaDTO.getSocioId())
+                .orElseThrow(() -> new RuntimeException("Socio no encontrado con documento: " + comidaDTO.getSocioId()));
 
+        // Asignar el socio a la entidad de comida
         comidaEntity.setSocio(socio);
 
         ComidaEntity savedComida = comidaRepository.save(comidaEntity);

@@ -17,5 +17,5 @@ public class ComidaDTO {
     private double valorComida;
     private LocalDate fecha;
     private boolean pago;
-    private Long socioId;
+    private String socioId;
 }
