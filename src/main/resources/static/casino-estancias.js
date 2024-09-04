@@ -17,11 +17,16 @@ function totales(month, year, data) {
     for (let j = 1; j <= 5; j++) {
         for (let i = 1; i <= 7; i++) {
             for (let k = 1; k <= 3; k++) {
-                total=sumarDosNumeros(total,parseInt(document.getElementById("semana" + j + "-" + i + "-" + k).textContent));
-                console.log(total)
+                if (parseInt((document.getElementById("semana" + j + "-" + i + "-" + k).textContent)) > 0) {
+                    total++;
+                }
+                if (total==3){
+                    document.getElementById("semana" + j + "-" + i +""+ i).textContent = 1;
+                }
+
             }
-            document.getElementById("semana" + j + "-" + i +i).textContent =total;
-            total=0;
+
+            total = 0;
         }
     }
 }
@@ -40,29 +45,32 @@ function updateComida(month, year, data) {
 
 
 function mapCalendar(month, year, clase_comida) {
-    let dias_total = getDiasEntreFechas(20, month, year, 20, month + 1, year)
-    let semana = 1;
-    let i_aux = 20;
-    let dia_aux = 1;
-    for (let i = 0; i <= dias_total; i++) {
-        if (i_aux > getDiasEnMes(month, year)) {
-            i_aux = 1;
-            month++;
-        }
-        if (dia_aux > 7) {
-            dia_aux = 1;
-        }
+    try {
+        let dias_total = getDiasEntreFechas(21, month, year, 20, month + 1, year)
+        let semana = 1;
+        let i_aux = 21;
+        let dia_aux = 1;
+        for (let i = 0; i <= dias_total; i++) {
+            if (i_aux > getDiasEnMes(month, year)) {
+                i_aux = 1;
+                month++;
+            }
+            if (dia_aux > 7) {
+                dia_aux = 1;
+            }
 
-        if (dia_aux == 7) {
-            document.getElementById("semana" + semana + "-" + dia_aux).textContent = getDayOfWeek(i_aux, month, year) + "." + i_aux;
-            semana++;
-        } else {
-            document.getElementById("semana" + semana + "-" + dia_aux).textContent = getDayOfWeek(i_aux, month, year) + "." + i_aux;
+            if (dia_aux == 7) {
+                document.getElementById("semana" + semana + "-" + dia_aux).textContent = getDayOfWeek(i_aux, month, year) + "." + i_aux;
+                semana++;
+            } else {
+                document.getElementById("semana" + semana + "-" + dia_aux).textContent = getDayOfWeek(i_aux, month, year) + "." + i_aux;
+            }
+            i_aux++;
+            dia_aux++;
         }
-        i_aux++;
-        dia_aux++;
+    } catch (e) {
+        console.log("error")
     }
-
 
 }
 
@@ -154,3 +162,10 @@ function sumarDosNumeros(num1, num2) {
         return 0;
     }
 }
+
+function contarEstancias(texto) {
+    if (texto.trim() === "") {
+        return 1;
+    }
+}
+
