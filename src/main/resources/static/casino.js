@@ -40,9 +40,14 @@ document.addEventListener("DOMContentLoaded", function() {
             currentMonth = 0;
             currentYear++;
         }
+        console.log(currentMonth)
         updateMonth();
     };
 
     updateMonth(); // Set the initial month
 });
+
+
+
+// Ejemplo de uso
 
