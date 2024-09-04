@@ -6,11 +6,40 @@ document.addEventListener("DOMContentLoaded", function () {
         .then(data => {
             console.log(data);
             mapCalendar(8, 2024);
+            updateComida(8, 2024, data)
+            totales(8, 2024, data)
         })
         .catch(error => console.error('Error al obtener las comidas:', error));
 });
 
-function mapCalendar(month, year) {
+function totales(month, year, data) {
+    let total = 0;
+    for (let j = 1; j <= 5; j++) {
+        for (let i = 1; i <= 7; i++) {
+            for (let k = 1; k <= 3; k++) {
+                total=sumarDosNumeros(total,parseInt(document.getElementById("semana" + j + "-" + i + "-" + k).textContent));
+                console.log(total)
+            }
+            document.getElementById("semana" + j + "-" + i +i).textContent =total;
+            total=0;
+        }
+    }
+}
+
+function updateComida(month, year, data) {
+    for (let j = 1; j <= 5; j++) {
+        for (let i = 1; i <= 7; i++) {
+            data.forEach(item => {
+                if (convertirFecha(document.getElementById("semana" + j + "-" + i).textContent.trim(), month, year) === item.fecha) {
+                    document.getElementById("semana" + j + "-" + i + "-" + item.claseComida).textContent = item.cantidad;
+                }
+            });
+        }
+    }
+}
+
+
+function mapCalendar(month, year, clase_comida) {
     let dias_total = getDiasEntreFechas(20, month, year, 20, month + 1, year)
     let semana = 1;
     let i_aux = 20;
@@ -25,35 +54,16 @@ function mapCalendar(month, year) {
         }
 
         if (dia_aux == 7) {
-            document.getElementById("semana" + semana + "-" + dia_aux).textContent = getDayOfWeek(i_aux, month, year) + "/" + i_aux;
+            document.getElementById("semana" + semana + "-" + dia_aux).textContent = getDayOfWeek(i_aux, month, year) + "." + i_aux;
             semana++;
         } else {
-            document.getElementById("semana" + semana + "-" + dia_aux).textContent = getDayOfWeek(i_aux, month, year) + "/" + i_aux;
+            document.getElementById("semana" + semana + "-" + dia_aux).textContent = getDayOfWeek(i_aux, month, year) + "." + i_aux;
         }
         i_aux++;
         dia_aux++;
     }
 
 
-}
-
-function getDayOfWeek20(month, year) {
-    // Verificar si el mes es válido (debe estar entre 1 y 12)
-    if (month < 1 || month > 12) {
-        return "Mes inválido";
-    }
-
-    // Crear una fecha para el 20 del mes y año proporcionados
-    const date = new Date(year, month - 1, 20); // Restar 1 al mes ya que los meses en JavaScript son 0-indexados (0 = Enero, 11 = Diciembre)
-
-    // Array de los nombres de los días de la semana
-    const dayNames = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
-
-    // Obtener el día de la semana
-    const dayOfWeek = dayNames[date.getDay()];
-
-    // Retornar el día de la semana
-    return dayOfWeek;
 }
 
 function getDayOfWeek(day, month, year) {
@@ -111,3 +121,36 @@ function getDiasEntreFechas(diaInicio, mesInicio, anioInicio, diaFin, mesFin, an
     return diasEntreFechas;
 }
 
+function convertirFecha(formatoOriginal, mes, year) {
+    // Divide la cadena en partes utilizando el punto como delimitador
+    let partesFecha = formatoOriginal.split('.');
+
+    // Obtén el día de las partes divididas
+    let dia = partesFecha[1];
+
+    // Asegúrate de que el mes esté en formato de dos dígitos
+    let mesFormateado = mes.toString().padStart(2, '0');
+
+    // Forma la fecha en formato YYYY-MM-DD
+    let fechaFormateada = `${year}-${mesFormateado}-${dia}`;
+
+    return fechaFormateada;
+}
+
+function sumarDosNumeros(num1, num2) {
+    try {
+        // Intenta convertir los argumentos a números
+        let valor1 = parseFloat(num1);
+        let valor2 = parseFloat(num2);
+
+        // Verifica si ambos valores son números válidos
+        if (isNaN(valor1) || isNaN(valor2)) {
+            return 0;
+        }
+
+        // Retorna la suma de los dos números
+        return valor1 + valor2;
+    } catch (error) {
+        return 0;
+    }
+}

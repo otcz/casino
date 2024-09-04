@@ -43,7 +43,7 @@
 /* Ajuste para pantallas pequeñas */
 @media (max-width: 768px) {
     .availability-table {
-        font-size: 14px;
+        font-size: 12px;
     }
 
     .availability-table th,
