@@ -1,3 +1,7 @@
+let resumen = {
+    TOTALESTANCIAS:0, DESAYUNOS_EXTRAS:0, ALMUERZOS_EXTRAS:0, CENA_EXTRAS:0
+}
+
 document.addEventListener("DOMContentLoaded", function () {
     const socioDocumento = sessionStorage.getItem("documento");
 
@@ -10,15 +14,29 @@ document.addEventListener("DOMContentLoaded", function () {
             totales(8, 2024, data)
             totales_semanales(8, 2024, data)
             suma_semanales()
+            resumenServicios()
         })
         .catch(error => console.error('Error al obtener las comidas:', error));
 });
+
+function resumenServicios() {
+    // Asigna la cantidad de estancias
+    document.getElementById("total-estancias-cantidad").textContent = resumen.TOTALESTANCIAS;
+
+    // Asigna el valor unitario
+    document.getElementById("total-estancias-valor-uni").textContent = "$18.300";
+
+    // Multiplica TOTALESTANCIAS por 18,300
+    let totalEstancias = resumen.TOTALESTANCIAS * 18300;
+
+    // Asigna el valor total al elemento
+    document.getElementById("total-estancias-total").textContent = "$" + totalEstancias.toLocaleString();
+}
 
 function suma_semanales() {
     let total = 0;
     for (let j = 1; j <= 5; j++) {
         for (let k = 1; k <= 3; k++) {
-            console.log(document.getElementById("semana" + j + "-" + k + "S").textContent)
             if (parseInt(document.getElementById("semana" + j + "-" + k + "S").textContent) > 0) {
                 total = total + parseInt(document.getElementById("semana" + j + "-" + k + "S").textContent);
                 document.getElementById("semana" + j + "-total_semanal").textContent = total;
@@ -54,6 +72,7 @@ function totales(month, year, data) {
                     total++;
                 }
                 if (total == 3) {
+                    resumen.TOTALESTANCIAS++;
                     document.getElementById("semana" + j + "-" + i + "" + i).textContent = 1;
                 }
 
