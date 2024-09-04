@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
         .then(response => response.json())
         .then(data => {
             console.log(data);
-            mapCalendar(9, 2024);
+            mapCalendar(8, 2024);
         })
         .catch(error => console.error('Error al obtener las comidas:', error));
 });
@@ -14,23 +14,25 @@ function mapCalendar(month, year) {
     let dias_total = getDiasEntreFechas(20, month, year, 20, month + 1, year)
     let semana = 1;
     let i_aux = 20;
-
+    let dia_aux = 1;
     for (let i = 0; i <= dias_total; i++) {
         if (i_aux > getDiasEnMes(month, year)) {
-            i_aux=1;
+            i_aux = 1;
             month++;
         }
+        if (dia_aux > 7) {
+            dia_aux = 1;
+        }
 
-        if (getDayOfWeek(i_aux, month, year) == "domingo") {
-            document.getElementById("semana" + semana + "-" + getDayOfWeek(i_aux, month, year)).textContent = getDayOfWeek(i_aux, month, year) + "/" + i_aux;
+        if (dia_aux == 7) {
+            document.getElementById("semana" + semana + "-" + dia_aux).textContent = getDayOfWeek(i_aux, month, year) + "/" + i_aux;
             semana++;
         } else {
-            document.getElementById("semana" + semana + "-" + getDayOfWeek(i_aux, month, year)).textContent = getDayOfWeek(i_aux, month, year) + "/" + i_aux;
+            document.getElementById("semana" + semana + "-" + dia_aux).textContent = getDayOfWeek(i_aux, month, year) + "/" + i_aux;
         }
         i_aux++;
-
+        dia_aux++;
     }
-
 
 
 }
