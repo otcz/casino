@@ -8,9 +8,31 @@ document.addEventListener("DOMContentLoaded", function () {
             mapCalendar(8, 2024);
             updateComida(8, 2024, data)
             totales(8, 2024, data)
+            totales_semanales(8, 2024, data)
         })
         .catch(error => console.error('Error al obtener las comidas:', error));
 });
+
+function totales_semanales(month, year, data) {
+    let total = 0;
+    for (let j = 1; j <= 5; j++) {
+         // console.log(j+"---SEMANA")
+        for (let k = 1; k <= 3; k++) {
+             // console.log(k+"-----COMIDA")
+            for (let i = 1; i <= 7; i++) {
+                 console.log(i+"--------DIA")
+                console.log((document.getElementById("semana" + j + "-" +i+"-"+ k).textContent)+"-----------DATO DIA")
+                if (parseInt((document.getElementById("semana" + j + "-" +i+"-"+ k).textContent)) > 0) {
+                    total=total+parseInt((document.getElementById("semana" + j + "-" +i+"-"+ k).textContent));
+                    document.getElementById("semana" + j + "-" + k + "S").textContent=total;
+                }
+              total=0;
+            }
+
+        }
+
+    }
+}
 
 function totales(month, year, data) {
     let total = 0;
