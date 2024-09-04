@@ -9,24 +9,35 @@ document.addEventListener("DOMContentLoaded", function () {
             updateComida(8, 2024, data)
             totales(8, 2024, data)
             totales_semanales(8, 2024, data)
+            suma_semanales()
         })
         .catch(error => console.error('Error al obtener las comidas:', error));
 });
 
+function suma_semanales() {
+    let total = 0;
+    for (let j = 1; j <= 5; j++) {
+        for (let k = 1; k <= 3; k++) {
+            console.log(document.getElementById("semana" + j + "-" + k + "S").textContent)
+            if (parseInt(document.getElementById("semana" + j + "-" + k + "S").textContent) > 0) {
+                total = total + parseInt(document.getElementById("semana" + j + "-" + k + "S").textContent);
+                document.getElementById("semana" + j + "-total_semanal").textContent = total;
+            }
+        }
+        total = 0;
+    }
+}
+
 function totales_semanales(month, year, data) {
     let total = 0;
     for (let j = 1; j <= 5; j++) {
-         // console.log(j+"---SEMANA")
         for (let k = 1; k <= 3; k++) {
-             // console.log(k+"-----COMIDA")
             for (let i = 1; i <= 7; i++) {
-                 console.log(i+"--------DIA")
-                console.log((document.getElementById("semana" + j + "-" +i+"-"+ k).textContent)+"-----------DATO DIA")
-                if (parseInt((document.getElementById("semana" + j + "-" +i+"-"+ k).textContent)) > 0) {
-                    total=total+parseInt((document.getElementById("semana" + j + "-" +i+"-"+ k).textContent));
-                    document.getElementById("semana" + j + "-" + k + "S").textContent=total;
+                if (parseInt((document.getElementById("semana" + j + "-" + i + "-" + k).textContent)) > 0) {
+                    total = total + parseInt((document.getElementById("semana" + j + "-" + i + "-" + k).textContent));
+                    document.getElementById("semana" + j + "-" + k + "S").textContent = total;
                 }
-              total=0;
+                total = 0;
             }
 
         }
@@ -42,8 +53,8 @@ function totales(month, year, data) {
                 if (parseInt((document.getElementById("semana" + j + "-" + i + "-" + k).textContent)) > 0) {
                     total++;
                 }
-                if (total==3){
-                    document.getElementById("semana" + j + "-" + i +""+ i).textContent = 1;
+                if (total == 3) {
+                    document.getElementById("semana" + j + "-" + i + "" + i).textContent = 1;
                 }
 
             }
