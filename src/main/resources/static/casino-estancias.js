@@ -18,6 +18,37 @@ document.addEventListener("DOMContentLoaded", function () {
         })
         .catch(error => console.error('Error al obtener las comidas:', error));
 });
+function comidas_extra() {
+
+    let total = 0;
+    for (let j = 1; j <= 5; j++) {
+        for (let i = 1; i <= 7; i++) {
+            for (let k = 1; k <= 3; k++) {
+                if (parseInt((document.getElementById("semana" + j + "-" + i + "-" + k).textContent)) > 0) {
+                    total++;
+                }
+                if (total == 3) {
+                    resumen.TOTALESTANCIAS++;
+                    document.getElementById("semana" + j + "-" + i + "" + i).textContent = 1;
+                }
+
+            }
+
+            total = 0;
+        }
+    }
+
+
+    for (let j = 1; j <= 5; j++) {
+        for (let k = 1; k <= 3; k++) {
+            for (let i = 1; i <= 7; i++) {
+
+            }
+
+        }
+
+    }
+}
 
 function resumenServicios() {
     // Asigna la cantidad de estancias
