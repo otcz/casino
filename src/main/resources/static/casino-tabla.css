@@ -1,53 +1,77 @@
-.table-container {
-    margin-top: 20px;
-    overflow-x: auto; /* Para desplazar la tabla en pantallas pequeñas */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-.availability-table {
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    padding: 20px;
+}
+
+.table-container {
+    margin-top: 20px;
+    overflow-x: auto;
+}
+
+.accounting-table {
     width: 100%;
     border-collapse: collapse;
     background-color: #ffffff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
+    border: 2px solid #ddd;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
     overflow: hidden;
-    text-align: left;
+    text-align: center;
     margin-bottom: 20px;
 }
 
-.availability-table th,
-.availability-table td {
-    padding: 10px;
+.accounting-table th, .accounting-table td {
+    padding: 12px;
     border: 1px solid #ddd;
-    text-align: center;
 }
 
-.availability-table th {
-    background-color: #006699;
+.accounting-table th {
+    background-color: #0a6ebd;
     color: #ffffff;
     font-weight: bold;
     text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
-.availability-table td {
+.accounting-table td {
     background-color: #f9f9f9;
 }
 
-.availability-table tr:nth-child(even) td {
-    background-color: #f2f2f2;
+.accounting-table tr:nth-child(even) td {
+    background-color: #f1f1f1;
 }
 
-.availability-table td strong {
+/* Estilos para filas finales */
+.accounting-table tfoot td {
+    background-color: #e0f7fa;
     font-weight: bold;
+    border-top: 2px solid #0a6ebd;
 }
 
-/* Ajuste para pantallas pequeñas */
+.accounting-table tfoot tr:last-child td {
+    background-color: #0a6ebd;
+    color: #ffffff;
+    font-size: 1.2em;
+}
+
+/* Ajustes para pantallas pequeñas */
 @media (max-width: 768px) {
-    .availability-table {
+    .accounting-table {
         font-size: 12px;
     }
 
-    .availability-table th,
-    .availability-table td {
+    .accounting-table th, .accounting-table td {
         padding: 8px;
+    }
+
+    .accounting-table tfoot td {
+        font-size: 14px;
     }
 }

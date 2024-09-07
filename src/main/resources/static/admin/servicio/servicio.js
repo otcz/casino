@@ -49,6 +49,7 @@ document.addEventListener('DOMContentLoaded', function () {
             .then(data => {
                 if (data) {
                     nombreSocioInput.value = data.nombre;
+
                     toggleFields(true); // Habilitar campos
 
                     // Actualizar el valor del servicio al encontrar un socio
@@ -91,6 +92,22 @@ document.addEventListener('DOMContentLoaded', function () {
         tipoServicioSelect.value = '1'; // Desayuno por defecto
     }
 
+    // Función para formatear el valor en moneda colombiana
+    function formatearMoneda(valor) {
+        return new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', minimumFractionDigits: 0 }).format(valor).replace(/\D00$/, '');
+    }
+
+    // Evento para permitir solo números y formatear el valor
+    valorServicioInput.addEventListener('input', function () {
+        // Remover caracteres no numéricos (excepto puntos y comas)
+        let valor = this.value.replace(/\D/g, '');
+
+        if (valor !== '') {
+            // Convertir a número y formatear en moneda colombiana
+            this.value = formatearMoneda(Number(valor));
+        }
+    });
+
     // Función para actualizar el valor del servicio basado en el tipo de servicio seleccionado y el día de la semana
     function actualizarValorServicio() {
         const selectedServicio = tipoServicioSelect.value;
@@ -106,8 +123,9 @@ document.addEventListener('DOMContentLoaded', function () {
         } else if (selectedServicio === '3') { // Cena
             valor = 7000; // Valor fijo para la cena
         }
-        console.log(valor.toLocaleString())
-        valorServicioInput.value = valor; // Actualizar el valor del servicio
+
+        // Formatear el valor en moneda colombiana
+        valorServicioInput.value = formatearMoneda(valor);
     }
 
     // Configurar el combobox y el valor del servicio al cargar la página

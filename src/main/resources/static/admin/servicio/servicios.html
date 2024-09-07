@@ -5,73 +5,195 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agregar Servicios</title>
     <link rel="stylesheet" href="servicio.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 <body>
 
-<div class="form-container">
-    <h2>Agregar Servicios</h2>
-    <form id="form-servicios">
-        <!-- Campo de búsqueda de socio -->
-        <div class="form-group search-group">
-            <label for="buscar-socio">Buscar Socio (Documento de Identidad)</label>
-            <div class="search-bar">
-                <input type="text" id="buscar-socio" name="buscar-socio" placeholder="Ingrese documento de identidad">
-                <button type="button" id="buscar-btn">Buscar</button>
-            </div>
+<!-- Cabecera con título y usuario admin -->
+<header class="header">
+    <div class="header-content">
+        <h1>Gestión de Servicio para el Socio</h1>
+        <div class="user-info">
+            <i class="fas fa-user-shield"></i> ADMIN
         </div>
+    </div>
+</header>
 
-        <!-- Mostrar nombre del socio -->
-        <div class="form-group">
-            <label for="nombre-socio">Nombre del Socio</label>
-            <input type="text" id="nombre-socio" name="nombre-socio" placeholder="Nombre del socio" readonly>
-        </div>
-
-        <div class="form-group">
-            <label for="valor-servicio">Valor del Servicio</label>
-            <input type="text" id="valor-servicio" name="valor-servicio" placeholder="Valor del servicio" readonly>
-        </div>
-
-
-        <!-- Módulo para agregar estancias -->
-        <div class="form-group">
-            <label for="cantidad-estancias">Cantidad de Estancias</label>
-            <input type="number" id="cantidad-estancias" name="cantidad-estancias" min="1" placeholder="Ingrese cantidad" disabled>
-        </div>
-
-
-        <div class="form-group">
-            <label for="tipo-servicio">Tipo de Servicio</label>
-            <select id="tipo-servicio" name="tipo-servicio" required>
-                <option value="1">Desayuno</option>
-                <option value="2">Almuerzo</option>
-                <option value="3">Cena</option>
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label for="fecha-servicio">Fecha</label>
-            <input type="date" id="fecha-servicio" name="fecha-servicio" value="" disabled>
-        </div>
-
-        <!-- Módulo para opciones adicionales -->
-        <div class="form-group">
-            <label for="habilitar-habitacion">Habitación</label>
-            <input type="checkbox" id="habilitar-habitacion" name="habilitar-habitacion" disabled>
-            <input type="number" id="valor-habitacion" name="valor-habitacion" min="0" placeholder="Valor habitación" disabled>
-        </div>
-        <div class="form-group">
-            <label for="habilitar-fomento">Fomento</label>
-            <input type="checkbox" id="habilitar-fomento" name="habilitar-fomento" disabled>
-            <input type="number" id="valor-fomento" name="valor-fomento" min="0" placeholder="Valor fomento" disabled>
-        </div>
-
-        <div class="form-group">
-            <button type="submit" disabled>Agregar Servicio</button>
-        </div>
-    </form>
+<div class="menu-slider">
+    <nav>
+        <ul>
+            <li><a href="#" data-section="alimentacion"><i class="fas fa-utensils"></i> Alimentación</a></li>
+            <li><a href="#" data-section="habitacion-fomento"><i class="fas fa-bed"></i> Habitación y Fomentos</a></li>
+            <li><a href="#" data-section="bar"><i class="fas fa-glass-martini-alt"></i> Bar</a></li>
+            <li><a href="#" data-section="cobrar"><i class="fas fa-cash-register"></i> Cobrar</a></li>
+            <li><a href="#" data-section="configuraciones"><i class="fas fa-cogs"></i> Configuraciones</a></li>
+        </ul>
+    </nav>
 </div>
 
-<script src="servicio.js"></script>
-<script src="registrar-comida.js"></script>
+<div class="content">
+    <section id="alimentacion" class="active-section">
+
+
+        <div class="form-container">
+            <h2>Agregar Servicios</h2>
+            <form id="form-servicios">
+                <!-- Campo de búsqueda de socio -->
+                <div class="form-group search-group">
+                    <label for="buscar-socio">Buscar Socio (Documento de Identidad)</label>
+                    <div class="search-bar">
+                        <input type="text" id="buscar-socio" name="buscar-socio" placeholder="Ingrese documento de identidad">
+                        <button type="button" id="buscar-btn">Buscar</button>
+                        <div class="rfid-checkbox">
+                            <input type="checkbox" id="rfid-check" name="rfid-check">
+                            <label for="rfid-check">RFDI</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mostrar nombre del socio -->
+                <div class="form-group">
+                    <label for="nombre-socio">Nombre del Socio</label>
+                    <input type="text" id="nombre-socio" name="nombre-socio" placeholder="Nombre del socio" readonly>
+                </div>
+
+                <div class="form-group">
+                    <label for="valor-servicio">Valor del Servicio</label>
+                    <div class="input-checkbox-group">
+                        <input type="text" id="valor-servicio" name="valor-servicio" placeholder="Valor del servicio">
+                        <div class="paid-checkbox">
+                            <input type="checkbox" id="pagado" name="pagado">
+                            <label for="pagado">Pagado</label>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+                <!-- Módulo para agregar estancias -->
+                <div class="form-group">
+                    <label for="cantidad-estancias">Cantidad de Estancias</label>
+                    <input type="number" value="1" id="cantidad-estancias" name="cantidad-estancias" min="1" placeholder="Ingrese cantidad" disabled>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="tipo-servicio">Tipo de Servicio</label>
+                    <select id="tipo-servicio" name="tipo-servicio" required>
+                        <option value="1">Desayuno</option>
+                        <option value="2">Almuerzo</option>
+                        <option value="3">Cena</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="fecha-servicio">Fecha</label>
+                    <input type="date" id="fecha-servicio" name="fecha-servicio" value="" disabled>
+                </div>
+
+
+                <div class="form-group">
+                    <button type="submit" disabled>Agregar Servicio</button>
+                </div>
+            </form>
+        </div>
+
+    </section>
+
+    <section id="habitacion-fomento" class="hidden-section">
+        <div class="form-container">
+            <h2>Habitación y Fomentos</h2>
+            <form id="form-habitacion-fomento">
+
+                <!-- Campo de búsqueda de socio -->
+                <div class="form-group search-group">
+                    <label for="buscar-socio">Buscar Socio (Documento de Identidad)</label>
+                    <div class="search-bar">
+                        <input type="text" id="buscar-socio2" name="buscar-socio" placeholder="Ingrese documento de identidad">
+                        <button type="button" id="buscar-btn2">Buscar</button>
+                        <div class="rfid-checkbox">
+                            <input type="checkbox" id="rfid-check2" name="rfid-check">
+                            <label for="rfid-check">RFDI</label>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Mostrar nombre del socio -->
+                <div class="form-group">
+                    <label for="nombre-socio">Nombre del Socio</label>
+                    <input type="text" id="nombre-socio2" name="nombre-socio" placeholder="Nombre del socio" readonly>
+                </div>
+
+
+                <!-- Módulo para opciones adicionales -->
+                <div class="form-group">
+                    <label for="habilitar-habitacion">Fondo habitacional</label>
+                    <input type="checkbox" id="habilitar-habitacion" name="habilitar-habitacion" disabled>
+                    <input type="number" id="valor-habitacion" name="valor-habitacion" min="0" placeholder="Valor habitación" disabled>
+                </div>
+
+                <!-- Nuevo campo: Fondo de Casino -->
+                <div class="form-group">
+                    <label for="habilitar-casino">Fondo de Casino</label>
+                    <input type="checkbox" id="habilitar-casino" name="habilitar-casino" disabled>
+                    <input type="number" id="valor-casino" name="valor-casino" min="0" placeholder="Valor casino" disabled>
+                </div>
+
+                <div class="form-group">
+                    <label for="habilitar-fomento">Fomento</label>
+                    <input type="checkbox" id="habilitar-fomento" name="habilitar-fomento" disabled>
+                    <input type="number" id="valor-fomento" name="valor-fomento" min="0" placeholder="Valor fomento" disabled>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" disabled>Agregar Servicio</button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <section id="bar" class="hidden-section">
+        <h2>Bar</h2>
+        <p>Gestiona el consumo en el bar desde aquí.</p>
+    </section>
+
+    <section id="cobrar" class="hidden-section">
+        <h2>Cobrar</h2>
+        <p>Aquí puedes realizar el cobro de servicios.</p>
+    </section>
+
+    <section id="configuraciones" class="hidden-section">
+        <h2>Configuraciones</h2>
+        <p>Personaliza las configuraciones del sistema.</p>
+    </section>
+</div>
+
+<script>
+    // Obtener todos los enlaces del menú
+    const menuLinks = document.querySelectorAll('.menu-slider a');
+    // Obtener todas las secciones
+    const sections = document.querySelectorAll('section');
+
+    // Añadir evento click a cada enlace del menú
+    menuLinks.forEach(link => {
+        link.addEventListener('click', function (event) {
+            event.preventDefault(); // Evitar navegación por defecto
+            const targetSection = this.getAttribute('data-section'); // Obtener la sección a mostrar
+
+            // Ocultar todas las secciones
+            sections.forEach(section => {
+                section.classList.add('hidden-section');
+                section.classList.remove('active-section');
+            });
+
+            // Mostrar la sección seleccionada
+            document.getElementById(targetSection).classList.add('active-section');
+            document.getElementById(targetSection).classList.remove('hidden-section');
+        });
+    });
+</script>
+
 </body>
 </html>

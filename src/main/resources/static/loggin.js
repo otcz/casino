@@ -17,6 +17,7 @@ document.getElementById("login-form").addEventListener("submit", function(event)
         body: JSON.stringify({ documento, password })
     })
         .then(response => {
+            console.log(response)
             if (response.ok) {
                 return response.json(); // Analiza la respuesta JSON
             } else if (response.status === 401) {

@@ -133,3 +133,215 @@ body {
         margin-top: 10px;
     }
 }
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Cabecera */
+.header {
+    background-color: #004080;
+    color: white;
+    padding: 10px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%; /* Ancho completo de la pantalla */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Sombra opcional */
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0 20px;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+}
+
+.user-info i {
+    margin-right: 5px;
+}
+
+/* Menu */
+.menu-slider {
+    width: 250px;
+    height: 100vh;
+    background-color: #006699;
+    position: fixed;
+    left: 0;
+    top: 60px; /* Para no superponerse con la cabecera */
+    padding-top: 20px;
+    overflow-y: auto;
+    z-index: 1000; /* Asegura que el menú esté por encima del contenido */
+}
+
+.menu-slider nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+.menu-slider nav ul li {
+    margin-bottom: 20px;
+}
+
+.menu-slider nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    transition: background-color 0.3s ease;
+}
+
+.menu-slider nav ul li a i {
+    margin-right: 10px;
+}
+
+.menu-slider nav ul li a:hover {
+    background-color: #005580;
+    border-radius: 5px;
+}
+
+/* Estilo del enlace seleccionado */
+.active-link {
+    background-color: #005580;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+}
+
+/* Content */
+.content {
+    margin-left: 250px; /* Espacio para el menú lateral */
+    padding: 80px 20px 20px 20px;
+    width: calc(100% - 250px); /* Ancho para no sobreponerse con el menú */
+    box-sizing: border-box; /* Asegura que el padding se incluya en el ancho total */
+}
+
+.content section {
+    margin-left: 0; /* Alinea todas las secciones al margen izquierdo */
+}
+
+/* Form Container */
+.form-container {
+    margin-top: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    margin: 0; /* Alinea el contenedor del formulario al margen izquierdo */
+}
+
+/* Ocultar y mostrar secciones */
+.hidden-section {
+    display: none;
+}
+
+.active-section {
+    display: block;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .menu-slider {
+        width: 100%;
+        height: auto;
+        position: relative;
+        top: 0;
+    }
+
+    .header {
+        width: 100%;
+        left: 0;
+    }
+
+    .content {
+        margin-left: 0;
+        padding: 100px 20px 20px 20px;
+    }
+
+    .menu-slider nav ul li {
+        text-align: center;
+    }
+}
+
+.search-group .search-bar {
+    display: flex;
+    align-items: center;
+}
+
+.search-group .search-bar button {
+    margin-left: 10px;
+    padding: 10px 15px;
+    font-size: 16px;
+    background-color: #28a745;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-family: 'Arial', sans-serif;
+}
+
+.search-group .search-bar button:hover {
+    background-color: #218838;
+}
+
+.rfid-checkbox {
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+}
+
+.rfid-checkbox input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+.rfid-checkbox label {
+    font-size: 16px;
+    color: #333;
+}
+
+.input-checkbox-group {
+    display: flex;
+    align-items: center;
+}
+
+.input-checkbox-group input[type="text"] {
+    flex-grow: 1;
+}
+
+.paid-checkbox {
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+}
+
+.paid-checkbox input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+.paid-checkbox label {
+    font-size: 16px;
+    color: #333;
+}

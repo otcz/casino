@@ -1,6 +1,7 @@
 package baada2.casino.controller;
 
 import baada2.casino.entity.comida.ComidaDTO;
+import baada2.casino.entity.comida.TablaDTO;
 import baada2.casino.entity.socio.LoginRequestDTO;
 import baada2.casino.entity.socio.SocioDTO;
 import baada2.casino.service.comida.ComidaService;
@@ -73,9 +74,8 @@ public class SocioController {
 
 
     @GetMapping("/comida/{documento}")
-    public ResponseEntity<List<ComidaDTO>> obtenerComidasPorSocio(@PathVariable String documento) {
-        List<ComidaDTO> comidas = comidaService.obtenerComidasPorSocio(documento);
-        System.out.println(comidas.toString());
+    public ResponseEntity<TablaDTO> obtenerComidasPorSocio(@PathVariable String documento) {
+        TablaDTO comidas = comidaService.obtenerComidasPorSocio(documento);
         return ResponseEntity.ok(comidas);
     }
 }

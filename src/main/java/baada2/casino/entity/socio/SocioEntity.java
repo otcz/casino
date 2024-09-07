@@ -31,8 +31,17 @@ public class SocioEntity {
     @Column(name = "estado", nullable = true)
     private String estado;
 
-    @Column(name = "password", nullable = true)
+    @Column(name = "password", nullable = false)
     private String password;
+
+    @Column(name = "fondocasino", nullable = true)
+    private double fondoCasino;
+
+    @Column(name = "fomento", nullable = true)
+    private double fomento;
+
+    @Column(name = "fondohabitacional", nullable = true)
+    private double fondoHabitacional;
 
     @OneToMany(mappedBy = "socio", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ComidaEntity> comidaEntityList;

@@ -27,6 +27,9 @@ public class SocioService {
         socioEntity.setEstado(socioDTO.getEstado());
         socioEntity.setPassword(socioDTO.getPassword());
         socioEntity.setDocumento(socioDTO.getDocumento());
+        socioEntity.setFondoCasino(socioDTO.getFondoCasino());
+        socioEntity.setFondoHabitacional(socioDTO.getFondoHabitacional());
+        socioEntity.setFomento(socioDTO.getFomento());
 
         SocioEntity savedSocio = socioRepository.save(socioEntity);
 
@@ -73,6 +76,10 @@ public class SocioService {
         socioDTO.setEstado(socioEntity.getEstado());
         socioDTO.setPassword(socioEntity.getPassword());
         socioDTO.setDocumento(socioEntity.getDocumento());
+
+        socioDTO.setFondoCasino(socioEntity.getFondoCasino());
+        socioDTO.setFondoHabitacional(socioEntity.getFondoHabitacional());
+        socioDTO.setFomento(socioEntity.getFomento());
         return socioDTO;
     }
     private SocioDTO mapToDTO(SocioEntity socioEntity) {
@@ -83,6 +90,10 @@ public class SocioService {
         socioDTO.setEstado(socioEntity.getEstado());
         socioDTO.setPassword(socioEntity.getPassword());
         socioDTO.setDocumento(socioEntity.getDocumento());
+
+        socioDTO.setFondoCasino(socioEntity.getFondoCasino());
+        socioDTO.setFondoHabitacional(socioEntity.getFondoHabitacional());
+        socioDTO.setFomento(socioEntity.getFomento());
         return socioDTO;
     }
 }

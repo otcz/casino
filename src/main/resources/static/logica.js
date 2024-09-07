@@ -1,4 +1,3 @@
-
 document.addEventListener('DOMContentLoaded', () => {
     // Selecciona todos los enlaces de navegación y las secciones
     const navLinks = document.querySelectorAll('.nav-link');
@@ -28,13 +27,19 @@ document.addEventListener('DOMContentLoaded', () => {
             link.classList.add('active');
         });
     });
+
     // Obtiene el nombre del usuario desde sessionStorage
     const userName = sessionStorage.getItem('userName');
-    const userGreeting = document.getElementById('user-greeting');
+    const userGreeting = document.getElementById('user-name');
 
-    if (userName) {
-        userGreeting.textContent = `Hola, ${userName}!`;
+    // Verifica si el elemento user-greeting existe
+    if (userGreeting) {
+        if (userName) {
+            userGreeting.textContent = userName;
+        } else {
+            userGreeting.textContent = 'visitante';
+        }
     } else {
-        userGreeting.textContent = 'Hola, visitante!';
+        console.error("error");
     }
 });

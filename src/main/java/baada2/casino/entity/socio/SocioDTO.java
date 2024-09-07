@@ -20,4 +20,8 @@ public class SocioDTO {
     private Long id;
     private String password;
 
+    private double fondoCasino=0;
+    private double fomento=0;
+    private double fondoHabitacional=0;
+
 }
