@@ -68,10 +68,8 @@ public class ComidaService {
         SocioEntity socio = socioRepository.findByDocumento(documento)
                 .orElseThrow(() -> new RuntimeException("Socio no encontrado con documento: " + documento));
 
-        // Filtrar las comidas que no están pagadas ("pagado" == "N")
-        List<ComidaEntity> comidas = comidaRepository.findBySocio(socio).stream()
-                .filter(comida -> (!comida.isPago())) // Filtrar solo las no pagadas
-                .collect(Collectors.toList());
+        // Ya no se filtran las comidas por pagado
+        List<ComidaEntity> comidas = comidaRepository.findBySocio(socio);
 
         Map<LocalDate, List<Integer>> comidasPorFecha = new TreeMap<>(Collections.reverseOrder()); // Orden descendente
         double totalEstancias = 0;

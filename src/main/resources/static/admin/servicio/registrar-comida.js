@@ -1,13 +1,14 @@
 document.getElementById('form-servicios').addEventListener('submit', function(event) {
     event.preventDefault();  // Evitar que se recargue la página al enviar el formulario
 
+
     // Obtener los valores del formulario
     const socioId = document.getElementById('buscar-socio').value;
     const tipoServicio = document.getElementById('tipo-servicio').value;
     const valorServicio = document.getElementById('valor-servicio').value;
     const fechaServicio = document.getElementById('fecha-servicio').value;
     const cantidadEstancias = document.getElementById('cantidad-estancias').value;
-    const pago = false; // O el valor que corresponda según tu lógica
+    const pago = document.getElementById('pagado').checked; // O el valor que corresponda según tu lógica
 
     // Crear el objeto ComidaDTO para enviar al backend
     const comidaDTO = {
@@ -30,7 +31,7 @@ document.getElementById('form-servicios').addEventListener('submit', function(ev
         .then(response => response.json())
         .then(data => {
             console.log('Comida creada con éxito:', data);
-            alert("RESPUESTA->"+data)
+            alert(obtenerComida(parseInt(data.claseComida))+" Registrado")
             // Aquí podrías mostrar un mensaje de éxito o redirigir a otra página
         })
         .catch((error) => {
@@ -38,3 +39,16 @@ document.getElementById('form-servicios').addEventListener('submit', function(ev
             // Aquí podrías mostrar un mensaje de error
         });
 });
+
+function obtenerComida(numero) {
+    switch (numero) {
+        case 1:
+            return "Desayuno";
+        case 2:
+            return "Almuerzo";
+        case 3:
+            return "Cena";
+        default:
+            return "Opción no válida"; // Por si el número no es 1, 2 o 3
+    }
+}

@@ -6,6 +6,9 @@
     <title>Agregar Servicios</title>
     <link rel="stylesheet" href="servicio.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script src="RFID.js"></script>
+    <script src="servicio.js"></script>
+
 </head>
 <body>
 
@@ -45,13 +48,13 @@
                         <input type="text" id="buscar-socio" name="buscar-socio" placeholder="Ingrese documento de identidad">
                         <button type="button" id="buscar-btn">Buscar</button>
                         <div class="rfid-checkbox">
-                            <input type="checkbox" id="rfid-check" name="rfid-check">
+                            <input type="checkbox" id="rfid-check" onchange="toggleSocioInputServicios()" name="rfid-check">
                             <label for="rfid-check">RFDI</label>
                         </div>
                     </div>
                 </div>
 
-                <!-- Mostrar nombre del socio -->
+                <!-- Campo de nombre del socio -->
                 <div class="form-group">
                     <label for="nombre-socio">Nombre del Socio</label>
                     <input type="text" id="nombre-socio" name="nombre-socio" placeholder="Nombre del socio" readonly>
@@ -113,7 +116,7 @@
                         <input type="text" id="buscar-socio2" name="buscar-socio" placeholder="Ingrese documento de identidad">
                         <button type="button" id="buscar-btn2">Buscar</button>
                         <div class="rfid-checkbox">
-                            <input type="checkbox" id="rfid-check2" name="rfid-check">
+                            <input type="checkbox" id="rfid-check2" onchange="toggleSocioInputHabitacionFomento()" name="rfid-check">
                             <label for="rfid-check">RFDI</label>
                         </div>
                     </div>
@@ -196,4 +199,6 @@
 </script>
 
 </body>
+<script src="registrar-comida.js"></script>
+
 </html>
