@@ -54,14 +54,20 @@ document.addEventListener("DOMContentLoaded", function () {
             // Actualizar los totales en el pie de tabla con formato de miles
             const totalEstanciasElem = document.getElementById('total-estancias');
             const totalExtra = document.getElementById('total-extra');
+            const totalEstanciasPaga = document.getElementById('total-estancias-paga');
+            const totalExtraPaga = document.getElementById('total-extra-paga');
             const totalPagarElem = document.getElementById('total-pagar');
             const fondoHabitacional = document.getElementById('fondo-habitacional');
             const fondoCasino = document.getElementById('fondo-casino');
             const fomento = document.getElementById('fomento');
 
+
             if (totalEstanciasElem && totalPagarElem) {
                 totalEstanciasElem.textContent = `$${data.totalEstancias.toLocaleString('es-CO')}`;
                 totalExtra.textContent = `$${data.totalExtra.toLocaleString('es-CO')}`;
+                totalEstanciasPaga.textContent = `$${data.totalEstanciaPagada.toLocaleString('es-CO')}`;
+                totalExtraPaga.textContent = `$${data.totalExtraPagada.toLocaleString('es-CO')}`;
+
                 totalPagarElem.textContent = `$${(data.totalPagar).toLocaleString('es-CO')}`;
                 fondoCasino.textContent = `$${(data.fondoCasino).toLocaleString('es-CO')}`;
                 fondoHabitacional.textContent = `$${(data.fondoHabitacional).toLocaleString('es-CO')}`;

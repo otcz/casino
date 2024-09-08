@@ -21,5 +21,8 @@ public class TablaDTO {
     private double fondoHabitacional = 0;
     private String totalPagar = "0";
     private double totalExtra = 0;
+    private double totalExtraPagada = 0;
+    private double totalEstanciaPagada = 0;
+
 
 }

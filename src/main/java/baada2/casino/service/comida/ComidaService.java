@@ -68,14 +68,16 @@ public class ComidaService {
         SocioEntity socio = socioRepository.findByDocumento(documento)
                 .orElseThrow(() -> new RuntimeException("Socio no encontrado con documento: " + documento));
 
-        // Ya no se filtran las comidas por pagado
+        // Obtenemos todas las comidas del socio (incluidas las pagadas)
         List<ComidaEntity> comidas = comidaRepository.findBySocio(socio);
 
         Map<LocalDate, List<Integer>> comidasPorFecha = new TreeMap<>(Collections.reverseOrder()); // Orden descendente
         double totalEstancias = 0;
         double totalExtra = 0;
+        double totalEstanciasPagadas = 0;
+        double totalExtraPagadas = 0;
 
-        // Iterar sobre las comidas no pagadas y agregarlas a la tabla
+        // Iterar sobre todas las comidas y agregarlas a la tabla
         for (ComidaEntity comida : comidas) {
             List<Integer> cantidades = comidasPorFecha.getOrDefault(comida.getFecha(), Arrays.asList(0, 0, 0)); // desayuno, almuerzo, cena
 
@@ -94,7 +96,7 @@ public class ComidaService {
             comidasPorFecha.put(comida.getFecha(), cantidades);
         }
 
-        // Calcular estancias y extras solo para las comidas no pagadas
+        // Calcular estancias y extras para comidas pagadas y no pagadas
         for (Map.Entry<LocalDate, List<Integer>> entry : comidasPorFecha.entrySet()) {
             List<Integer> cantidades = entry.getValue();
             int desayunos = cantidades.get(0);
@@ -102,25 +104,58 @@ public class ComidaService {
             int cenas = cantidades.get(2);
 
             // Verificar si hay al menos un desayuno, un almuerzo y una cena
-            if (desayunos > 0 && almuerzos > 0 && cenas > 0) {
-                // Estancia
-                totalEstancias += 18300;
+            boolean allMealsPaid = comidas.stream()
+                    .filter(comida -> comida.getFecha().equals(entry.getKey()))
+                    .allMatch(ComidaEntity::isPago);
 
-                // Calcular extras
-                if (desayunos > 1) {
-                    totalExtra += (desayunos - 1) * 7000;
-                }
-                if (almuerzos > 1) {
-                    totalExtra += (almuerzos - 1) * 10000;
-                }
-                if (cenas > 1) {
-                    totalExtra += (cenas - 1) * 7000;
+            if (desayunos > 0 && almuerzos > 0 && cenas > 0) {
+                // Verificar si la estancia completa está pagada
+                if (allMealsPaid) {
+                    // Estancia pagada
+                    totalEstanciasPagadas += 18300;
+
+                    // Calcular extras pagados
+                    if (desayunos > 1) {
+                        totalExtraPagadas += (desayunos - 1) * 7000;
+                    }
+                    if (almuerzos > 1) {
+                        totalExtraPagadas += (almuerzos - 1) * 10000;
+                    }
+                    if (cenas > 1) {
+                        totalExtraPagadas += (cenas - 1) * 7000;
+                    }
+                } else {
+                    // Estancia no pagada
+                    totalEstancias += 18300;
+
+                    // Calcular extras no pagados
+                    if (desayunos > 1) {
+                        totalExtra += (desayunos - 1) * 7000;
+                    }
+                    if (almuerzos > 1) {
+                        totalExtra += (almuerzos - 1) * 10000;
+                    }
+                    if (cenas > 1) {
+                        totalExtra += (cenas - 1) * 7000;
+                    }
                 }
             } else {
-                // No hay estancia completa, pero se deben calcular los extras
-                totalExtra += desayunos * 7000;
-                totalExtra += almuerzos * 10000;
-                totalExtra += cenas * 7000;
+                // Calcular extras para comidas individuales (no hay estancia completa)
+                boolean hasUnpaidMeal = comidas.stream()
+                        .filter(comida -> comida.getFecha().equals(entry.getKey()))
+                        .anyMatch(comida -> !comida.isPago());
+
+                if (hasUnpaidMeal) {
+                    // Extras no pagados
+                    totalExtra += desayunos * 7000;
+                    totalExtra += almuerzos * 10000;
+                    totalExtra += cenas * 7000;
+                } else {
+                    // Extras pagados
+                    totalExtraPagadas += desayunos * 7000;
+                    totalExtraPagadas += almuerzos * 10000;
+                    totalExtraPagadas += cenas * 7000;
+                }
             }
         }
 
@@ -138,6 +173,8 @@ public class ComidaService {
         tablaDTO.setFecha(comidasPorFecha);
         tablaDTO.setTotalEstancias(totalEstancias);
         tablaDTO.setTotalExtra(totalExtra);
+        tablaDTO.setTotalEstanciaPagada(totalEstanciasPagadas);
+        tablaDTO.setTotalExtraPagada(totalExtraPagadas);
         tablaDTO.setFondoCasino(fondoCasino);
         tablaDTO.setFomento(fomento);
         tablaDTO.setFondoHabitacional(fondoHabitacional);
