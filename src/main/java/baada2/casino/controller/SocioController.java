@@ -4,6 +4,7 @@ import baada2.casino.entity.comida.ComidaDTO;
 import baada2.casino.entity.comida.TablaDTO;
 import baada2.casino.entity.socio.LoginRequestDTO;
 import baada2.casino.entity.socio.SocioDTO;
+import baada2.casino.entity.socio.SocioRegistroDTO;
 import baada2.casino.service.comida.ComidaService;
 import baada2.casino.service.socios.SocioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,12 +25,12 @@ public class SocioController {
     private ComidaService comidaService;
 
     @PostMapping("/crear")
-    public ResponseEntity<SocioDTO> crearSocio(@RequestBody SocioDTO socioDTO) {
+    public ResponseEntity<SocioRegistroDTO> crearSocio(@RequestBody SocioRegistroDTO socioDTO) {
+        System.out.println(socioDTO.toString()+"_________________________");
         try {
-            SocioDTO nuevoSocio = socioService.crearSocio(socioDTO);
+            SocioRegistroDTO nuevoSocio = socioService.crearSocio(socioDTO);
             return new ResponseEntity<>(nuevoSocio, HttpStatus.CREATED);
         } catch (Exception e) {
-            // Puedes registrar el error aquí
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error al crear socio", e);
         }
     }

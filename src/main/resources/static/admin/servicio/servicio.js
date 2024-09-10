@@ -6,9 +6,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const cantidadEstanciasInput = document.getElementById('cantidad-estancias');
     const tipoServicioSelect = document.getElementById('tipo-servicio');
     const fechaServicioInput = document.getElementById('fecha-servicio');
-    const habilitarHabitacionCheckbox = document.getElementById('habilitar-habitacion');
     const valorHabitacionInput = document.getElementById('valor-habitacion');
-    const habilitarFomentoCheckbox = document.getElementById('habilitar-fomento');
     const valorFomentoInput = document.getElementById('valor-fomento');
     const valorServicioInput = document.getElementById('valor-servicio');
     const submitBtn = document.querySelector('button[type="submit"]');
@@ -18,8 +16,6 @@ document.addEventListener('DOMContentLoaded', function () {
         cantidadEstanciasInput.disabled = !enable;
         tipoServicioSelect.disabled = !enable;
         fechaServicioInput.disabled = !enable;
-        habilitarHabitacionCheckbox.disabled = !enable;
-        habilitarFomentoCheckbox.disabled = !enable;
         valorServicioInput.disabled = !enable;  // Habilitar o deshabilitar valor del servicio
         submitBtn.disabled = !enable;
 
@@ -54,15 +50,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
                     // Actualizar el valor del servicio al encontrar un socio
                     actualizarValorServicio();
-
-                    // Lógica adicional si se habilitan las opciones adicionales
-                    habilitarHabitacionCheckbox.addEventListener('change', function () {
-                        valorHabitacionInput.disabled = !this.checked;
-                    });
-
-                    habilitarFomentoCheckbox.addEventListener('change', function () {
-                        valorFomentoInput.disabled = !this.checked;
-                    });
                 } else {
                     alert('Socio no encontrado.');
                     toggleFields(false); // Deshabilitar campos

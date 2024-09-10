@@ -2,6 +2,7 @@ package baada2.casino.service.socios;
 
 import baada2.casino.entity.socio.SocioDTO;
 import baada2.casino.entity.socio.SocioEntity;
+import baada2.casino.entity.socio.SocioRegistroDTO;
 import baada2.casino.repository.comida.ComidaRepository;
 import baada2.casino.repository.socio.SocioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,20 +21,32 @@ public class SocioService {
     @Autowired
     private ComidaRepository comidaRepository;
 
-    public SocioDTO crearSocio(SocioDTO socioDTO) {
+
+    public SocioRegistroDTO crearSocio(SocioRegistroDTO socioDTO) {
         SocioEntity socioEntity = new SocioEntity();
-        socioEntity.setGrado(socioDTO.getGrado());
         socioEntity.setNombre(socioDTO.getNombre());
-        socioEntity.setEstado(socioDTO.getEstado());
-        socioEntity.setPassword(socioDTO.getPassword());
         socioEntity.setDocumento(socioDTO.getDocumento());
-        socioEntity.setFondoCasino(socioDTO.getFondoCasino());
-        socioEntity.setFondoHabitacional(socioDTO.getFondoHabitacional());
-        socioEntity.setFomento(socioDTO.getFomento());
+        socioEntity.setPassword(socioDTO.getPassword());
+
+        socioEntity.setGrado(socioDTO.getGrado());
+        socioEntity.setEstado("EN PROCESO");
+
+        socioEntity.setFondoCasino(0.0);
+        socioEntity.setFondoHabitacional(0.0);
+        socioEntity.setFomento(0.0);
 
         SocioEntity savedSocio = socioRepository.save(socioEntity);
 
-        return mapToDTO(savedSocio);
+        return mapToRegistroDTO(savedSocio);
+    }
+
+    // Mapeo de Entity a DTO
+    private SocioRegistroDTO mapToRegistroDTO(SocioEntity socioEntity) {
+        SocioRegistroDTO socioDTO = new SocioRegistroDTO();
+        socioDTO.setNombre(socioEntity.getNombre());
+        socioDTO.setDocumento(socioEntity.getDocumento());
+        socioDTO.setPassword(socioEntity.getPassword());
+        return socioDTO;
     }
 
     public List<SocioDTO> obtenerSocios() {
@@ -70,7 +83,6 @@ public class SocioService {
     // Método de mapeo de SocioEntity a SocioDTO
     private SocioDTO convertirEntidadADTO(SocioEntity socioEntity) {
         SocioDTO socioDTO = new SocioDTO();
-        socioDTO.setId(socioEntity.getId());
         socioDTO.setGrado(socioEntity.getGrado());
         socioDTO.setNombre(socioEntity.getNombre());
         socioDTO.setEstado(socioEntity.getEstado());
@@ -84,7 +96,6 @@ public class SocioService {
     }
     private SocioDTO mapToDTO(SocioEntity socioEntity) {
         SocioDTO socioDTO = new SocioDTO();
-        socioDTO.setId(socioEntity.getId());
         socioDTO.setGrado(socioEntity.getGrado());
         socioDTO.setNombre(socioEntity.getNombre());
         socioDTO.setEstado(socioEntity.getEstado());
