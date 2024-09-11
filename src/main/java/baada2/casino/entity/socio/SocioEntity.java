@@ -19,6 +19,9 @@ public class SocioEntity {
     @Column(name = "documento", nullable = false)
     private String documento;
 
+    @Column(name = "idcard", nullable = true)
+    private String string;
+
     @Column(name = "grado", nullable = false)
     private String grado;
 
@@ -32,13 +35,13 @@ public class SocioEntity {
     private String password;
 
     @Column(name = "fondocasino", nullable = true)
-    private double fondoCasino;
+    private boolean fondoCasino;
 
     @Column(name = "fomento", nullable = true)
-    private double fomento;
+    private boolean fomento;
 
     @Column(name = "fondohabitacional", nullable = true)
-    private double fondoHabitacional;
+    private boolean fondoHabitacional;
 
     @OneToMany(mappedBy = "socio", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ComidaEntity> comidaEntityList;

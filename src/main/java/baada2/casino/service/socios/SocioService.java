@@ -31,9 +31,9 @@ public class SocioService {
         socioEntity.setGrado(socioDTO.getGrado());
         socioEntity.setEstado("EN PROCESO");
 
-        socioEntity.setFondoCasino(0.0);
-        socioEntity.setFondoHabitacional(0.0);
-        socioEntity.setFomento(0.0);
+        socioEntity.setFondoCasino(false);
+        socioEntity.setFondoHabitacional(false);
+        socioEntity.setFomento(false);
 
         SocioEntity savedSocio = socioRepository.save(socioEntity);
 
@@ -89,9 +89,9 @@ public class SocioService {
         socioDTO.setPassword(socioEntity.getPassword());
         socioDTO.setDocumento(socioEntity.getDocumento());
 
-        socioDTO.setFondoCasino(socioEntity.getFondoCasino());
-        socioDTO.setFondoHabitacional(socioEntity.getFondoHabitacional());
-        socioDTO.setFomento(socioEntity.getFomento());
+        socioDTO.setFondoCasino(socioEntity.isFondoCasino());
+        socioDTO.setFondoHabitacional(socioEntity.isFondoHabitacional());
+        socioDTO.setFomento(socioEntity.isFomento());
         return socioDTO;
     }
     private SocioDTO mapToDTO(SocioEntity socioEntity) {
@@ -102,9 +102,9 @@ public class SocioService {
         socioDTO.setPassword(socioEntity.getPassword());
         socioDTO.setDocumento(socioEntity.getDocumento());
 
-        socioDTO.setFondoCasino(socioEntity.getFondoCasino());
-        socioDTO.setFondoHabitacional(socioEntity.getFondoHabitacional());
-        socioDTO.setFomento(socioEntity.getFomento());
+        socioDTO.setFondoCasino(socioEntity.isFondoCasino());
+        socioDTO.setFondoHabitacional(socioEntity.isFondoHabitacional());
+        socioDTO.setFomento(socioEntity.isFomento());
         return socioDTO;
     }
 }

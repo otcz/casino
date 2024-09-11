@@ -4,6 +4,7 @@ function toggleSocioInputServicios() {
     const buscarSocio = document.getElementById('buscar-socio');
 
     // Campos adicionales a activar/desactivar
+    const nombreSocio = document.getElementById('nombre-socio');
     const valorServicio = document.getElementById('valor-servicio');
     const cantidadEstancias = document.getElementById('cantidad-estancias');
     const tipoServicio = document.getElementById('tipo-servicio');
@@ -13,8 +14,8 @@ function toggleSocioInputServicios() {
     if (rfidCheck.checked) {
         buscarSocio.setAttribute('readonly', true); // Desactivar campo de búsqueda de socio
         buscarSocio.value = '';
+        nombreSocio.value='';
         // Habilitar los campos relacionados
-        valorServicio.removeAttribute('disabled');
         cantidadEstancias.removeAttribute('disabled');
         tipoServicio.removeAttribute('disabled');
         fechaServicio.removeAttribute('disabled');
@@ -22,7 +23,6 @@ function toggleSocioInputServicios() {
         buscarSocio.removeAttribute('readonly'); // Volver a activar el campo de búsqueda de socio
 
         // Deshabilitar los campos relacionados
-        valorServicio.setAttribute('disabled', true);
         cantidadEstancias.setAttribute('disabled', true);
         tipoServicio.setAttribute('disabled', true);
         fechaServicio.setAttribute('disabled', true);

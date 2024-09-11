@@ -14,8 +14,10 @@ public class ComidaDTO {
     private Long id;
     private int cantidad;
     private String claseComida;
-    private double valorComida;
     private LocalDate fecha;
     private boolean pago;
-    private String socioId;
+    private double valorComida;
+
+    private Long socioId;
+    private Long costoFondosEstanciaId;
 }

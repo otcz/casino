@@ -1,5 +1,6 @@
 package baada2.casino.entity.comida;
 
+import baada2.casino.entity.configuraciones.CostoFondosEstanciaEntity;
 import baada2.casino.entity.socio.SocioEntity;
 import lombok.Getter;
 import lombok.Setter;
@@ -36,9 +37,15 @@ public class ComidaEntity {
     @Column(name = "cantidad", nullable = false)
     private int cantidad;
 
+
+    // Relación muchas comidas a un socio (ManyToOne)
     @ManyToOne
-    @JoinColumn(name = "socio_id")
+    @JoinColumn(name = "socio_id", nullable = false)
     private SocioEntity socio;
 
+    // Relación muchas comidas a un costo (ManyToOne)
+    @ManyToOne
+    @JoinColumn(name = "costo_fondos_estancia_id", nullable = false)
+    private CostoFondosEstanciaEntity costoFondosEstancia;
 
 }

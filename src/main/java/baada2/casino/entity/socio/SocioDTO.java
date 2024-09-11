@@ -18,10 +18,11 @@ public class SocioDTO {
     private String documento;
     private String estado;
     private Long id;
+    private Long idCard;
     private String password;
 
-    private double fondoCasino=0;
-    private double fomento=0;
-    private double fondoHabitacional=0;
+    private boolean fondoCasino=false;
+    private boolean fomento=false;
+    private boolean fondoHabitacional=false;
 
 }

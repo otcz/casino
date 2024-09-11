@@ -7,8 +7,9 @@
     <link rel="stylesheet" href="servicio.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <script src="RFID.js"></script>
-    <script src="servicio.js"></script>
-    <script src="abitacion-fomento-fondo.js"></script>
+    <script src="ServicioBuscarSocio.js"></script>
+    <script src="habitacion-fomento-fondo.js"></script>
+    <link rel="stylesheet" href="../../configuracion.css">
 
 </head>
 <body>
@@ -64,7 +65,7 @@
                 <div class="form-group">
                     <label for="valor-servicio">Valor del Servicio</label>
                     <div class="input-checkbox-group">
-                        <input type="text" id="valor-servicio" name="valor-servicio" placeholder="Valor del servicio">
+                        <input type="text" id="valor-servicio" name="valor-servicio" placeholder="Valor del servicio" disabled>
                         <div class="paid-checkbox">
                             <input type="checkbox" id="pagado" name="pagado">
                             <label for="pagado">Pagado</label>
@@ -127,7 +128,7 @@
                 <!-- Mostrar nombre del socio -->
                 <div class="form-group">
                     <label for="nombre-socio">Nombre del Socio</label>
-                    <input type="text" id="nombre-socio2" name="nombre-socio" placeholder="Nombre del socio" readonly>
+                    <input type="text" id="nombre-socio2" name="nombre-socio" placeholder="Nombre del socio" disabled>
                 </div>
 
 
@@ -149,8 +150,9 @@
                 </div>
 
                 <div class="form-group">
-                    <button type="submit" disabled>Agregar Servicio</button>
+                    <button type="submit" id="agregar-servicio-btn" disabled>Agregar Servicio</button>
                 </div>
+
             </form>
         </div>
     </section>
@@ -165,10 +167,59 @@
         <p>Aquí puedes realizar el cobro de servicios.</p>
     </section>
 
-    <section id="configuraciones" class="hidden-section">
-        <h2>Configuraciones</h2>
-        <p>Personaliza las configuraciones del sistema.</p>
+    <section id="configuraciones" class="configurations-section">
+        <h2>Configuraciones del Sistema</h2>
+
+        <form id="configForm">
+            <div class="input-box">
+                <label for="fondoCasino">Fondo Casino:</label>
+                <input type="text" id="fondoCasino" name="fondoCasino" value="0" required>
+            </div>
+            <div class="input-box">
+                <label for="fomento">Fomento:</label>
+                <input type="text" id="fomento" name="fomento" value="0" required>
+            </div>
+            <div class="input-box">
+                <label for="fondoHabitacional">Fondo Habitacional:</label>
+                <input type="text" id="fondoHabitacional" name="fondoHabitacional" value="0" required>
+            </div>
+            <div class="input-box">
+                <label for="desayuno">Desayuno:</label>
+                <input type="text" id="desayuno" name="desayuno" value="0" required>
+            </div>
+            <div class="input-box">
+                <label for="almuerzo">Almuerzo:</label>
+                <input type="text" id="almuerzo" name="almuerzo" value="0" required>
+            </div>
+            <div class="input-box">
+                <label for="cena">Cena:</label>
+                <input type="text" id="cena" name="cena" value="0" required>
+            </div>
+            <div class="input-box">
+                <label for="estancia">Estancia:</label>
+                <input type="text" id="estancia" name="estancia" value="0" required>
+            </div>
+            <div class="input-box">
+                <label for="especial">Especial:</label>
+                <input type="text" id="especial" name="especial" value="0" required>
+            </div>
+
+            <!-- Nuevo campo para seleccionar solo mes y año -->
+            <div class="input-box">
+                <label for="mesAnio">Mes y Año:</label>
+                <input type="month" id="mesAnio" name="mesAnio" required>
+            </div>
+
+            <button type="submit" class="submit-btn">Guardar Configuración</button>
+            <p id="responseMessage"></p>
+        </form>
+
+
+
+
+
     </section>
+
 </div>
 
 <script>
@@ -198,5 +249,5 @@
 
 </body>
 <script src="registrar-comida.js"></script>
-
+<script src="configuracion.js"></script>
 </html>

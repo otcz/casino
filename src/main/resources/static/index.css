@@ -115,8 +115,3 @@ a {
 a:hover {
     text-decoration: underline;
 }
-
-/* Estilo específico para el placeholder en minúsculas */
-input#name::placeholder {
-    text-transform: none; /* Mantiene el placeholder tal como está, en minúsculas */
-}
