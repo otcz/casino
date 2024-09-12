@@ -41,12 +41,10 @@ public class ComidaService {
         comidaEntity.setPago(comidaDTO.isPago());
 
         // Buscar el socio por documento
-        SocioEntity socio = socioRepository.findByDocumento(String.valueOf(comidaDTO.getSocioId()))
-                .orElseThrow(() -> new RuntimeException("Socio no encontrado con documento: " + comidaDTO.getSocioId()));
+        SocioEntity socio = socioRepository.findByDocumento(String.valueOf(comidaDTO.getSocioId())).orElseThrow(() -> new RuntimeException("Socio no encontrado con documento: " + comidaDTO.getSocioId()));
 
         // Buscar el socio por id
-        CostoFondosEstanciaEntity costoFondosEstanciaEntity = costoFondosEstanciaRepository.findById((comidaDTO.getCostoFondosEstanciaId()))
-                .orElseThrow(() -> new RuntimeException("Socio no encontrado con documento: " + comidaDTO.getCostoFondosEstanciaId()));
+        CostoFondosEstanciaEntity costoFondosEstanciaEntity = costoFondosEstanciaRepository.findById((comidaDTO.getCostoFondosEstanciaId())).orElseThrow(() -> new RuntimeException("Socio no encontrado con documento: " + comidaDTO.getCostoFondosEstanciaId()));
 
         // Asignar el socio a la entidad de comida
         comidaEntity.setSocio(socio);
@@ -57,9 +55,7 @@ public class ComidaService {
     }
 
     public List<ComidaDTO> obtenerComidas() {
-        return comidaRepository.findAll().stream()
-                .map(this::mapToDTO)
-                .collect(Collectors.toList());
+        return comidaRepository.findAll().stream().map(this::mapToDTO).collect(Collectors.toList());
     }
 
     private ComidaDTO mapToDTO(ComidaEntity comidaEntity) {
@@ -75,8 +71,7 @@ public class ComidaService {
     }
 
     public TablaDTO obtenerComidasPorSocio(String documento) {
-        SocioEntity socio = socioRepository.findByDocumento(documento)
-                .orElseThrow(() -> new RuntimeException("Socio no encontrado con documento: " + documento));
+        SocioEntity socio = socioRepository.findByDocumento(documento).orElseThrow(() -> new RuntimeException("Socio no encontrado con documento: " + documento));
 
 
         // Obtenemos todas las comidas del socio (incluidas las pagadas)
@@ -91,8 +86,7 @@ public class ComidaService {
             // Iterar sobre todas las comidas y agregarlas a la tabla
             for (ComidaEntity comida : comidas) {
                 // Buscar el socio por documento
-                costoFondosEstanciaEntity = costoFondosEstanciaRepository.findById((comida.getCostoFondosEstancia().getId()))
-                        .orElseThrow(() -> new RuntimeException("Socio no encontrado con documento: " + comida.getCostoFondosEstancia().getId()));
+                costoFondosEstanciaEntity = costoFondosEstanciaRepository.findById((comida.getCostoFondosEstancia().getId())).orElseThrow(() -> new RuntimeException("Socio no encontrado con documento: " + comida.getCostoFondosEstancia().getId()));
 
                 List<Integer> cantidades = comidasPorFecha.getOrDefault(comida.getFecha(), Arrays.asList(0, 0, 0)); // desayuno, almuerzo, cena
 
@@ -119,16 +113,13 @@ public class ComidaService {
                 int cenas = cantidades.get(2);
 
                 // Verificar si hay al menos un desayuno, un almuerzo y una cena
-                boolean allMealsPaid = comidas.stream()
-                        .filter(comida -> comida.getFecha().equals(entry.getKey()))
-                        .allMatch(ComidaEntity::isPago);
+                boolean allMealsPaid = comidas.stream().filter(comida -> comida.getFecha().equals(entry.getKey())).allMatch(ComidaEntity::isPago);
 
                 if (desayunos > 0 && almuerzos > 0 && cenas > 0) {
                     // Verificar si la estancia completa está pagada
                     if (allMealsPaid) {
                         // Estancia pagada
                         totalEstanciasPagadas += costoFondosEstanciaEntity.getEstancia();
-
                         // Calcular extras pagados
                         if (desayunos > 1) {
                             totalExtraPagadas += (desayunos - 1) * costoFondosEstanciaEntity.getDesayuno();
@@ -156,9 +147,7 @@ public class ComidaService {
                     }
                 } else {
                     // Calcular extras para comidas individuales (no hay estancia completa)
-                    boolean hasUnpaidMeal = comidas.stream()
-                            .filter(comida -> comida.getFecha().equals(entry.getKey()))
-                            .anyMatch(comida -> !comida.isPago());
+                    boolean hasUnpaidMeal = comidas.stream().filter(comida -> comida.getFecha().equals(entry.getKey())).anyMatch(comida -> !comida.isPago());
 
                     if (hasUnpaidMeal) {
                         // Extras no pagados
@@ -175,9 +164,9 @@ public class ComidaService {
             }
 
             // Cálculos adicionales (fondo casino, fomento, fondo habitacional)
-            double fondoCasino = costoFondosEstanciaEntity.getFondoCasino(); // Ejemplo de cálculo del fondo casino (5% de estancias)
-            double fomento = costoFondosEstanciaEntity.getFomento();     // Ejemplo de cálculo del fomento (3% de estancias)
-            double fondoHabitacional = costoFondosEstanciaEntity.getFondoHabitacional(); // Ejemplo de cálculo del fondo habitacional (2% de estancias)
+            double fondoCasino = socio.isFondoCasino() ? costoFondosEstanciaEntity.getFondoCasino() : 0; // Ejemplo de cálculo del fondo casino (5% de estancias)
+            double fomento = socio.isFomento() ? costoFondosEstanciaEntity.getFomento() : 0;   // Ejemplo de cálculo del fomento (3% de estancias)
+            double fondoHabitacional = socio.isFondoHabitacional() ? costoFondosEstanciaEntity.getFondoHabitacional() : 0; // Ejemplo de cálculo del fondo habitacional (2% de estancias)
 
             // Calcular total a pagar
             double totalPagar = totalEstancias + totalExtra + fondoCasino + fomento + fondoHabitacional;
@@ -200,11 +189,11 @@ public class ComidaService {
         } else {
             TablaDTO tablaDTO = new TablaDTO();
             if (socio.isFomento()) {
-                tablaDTO.setFomento(costoFondosEstanciaEntity.getFomento());
+                tablaDTO.setFomento(socio.isFomento() ? costoFondosEstanciaEntity.getFomento() : 0);
             } else if (socio.isFondoCasino()) {
-                tablaDTO.setFomento(costoFondosEstanciaEntity.getFondoCasino());
+                tablaDTO.setFondoCasino(socio.isFondoCasino() ? costoFondosEstanciaEntity.getFondoCasino() : 0);
             } else if (socio.isFondoHabitacional()) {
-                tablaDTO.setFomento(costoFondosEstanciaEntity.getFondoHabitacional());
+                tablaDTO.setFondoHabitacional(socio.isFondoHabitacional() ? costoFondosEstanciaEntity.getFondoHabitacional() : 0);
             }
             return tablaDTO;
 

@@ -1,5 +1,6 @@
-let costos;
-document.addEventListener('DOMContentLoaded', function () {
+let costos = null;  // Inicializamos la variable
+
+document.addEventListener('DOMContentLoaded', async function () {
     const buscarBtn = document.getElementById('buscar-btn');
     const buscarSocioInput = document.getElementById('buscar-socio');
     const nombreSocioInput = document.getElementById('nombre-socio');
@@ -58,6 +59,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     toggleFields(false);
 
+    // Fecha actual
     const today = new Date();
     const yyyy = today.getFullYear();
     const mm = String(today.getMonth() + 1).padStart(2, '0');
@@ -105,9 +107,11 @@ document.addEventListener('DOMContentLoaded', function () {
         const dayOfWeek = selectedDate.getDay();
 
         try {
-            const valoresEstancias = await consultarCostoFondosEstancia();
-
-            if (!valoresEstancias) {
+            if (!costos) {
+                // Consultar solo si no se ha hecho antes
+                costos = await consultarCostoFondosEstancia();
+            }
+            if (!costos) {
                 console.error("No se encontraron valores para las estancias.");
                 valorServicioInput.value = '';
                 return;
@@ -116,11 +120,11 @@ document.addEventListener('DOMContentLoaded', function () {
             let valor = 0;
 
             if (selectedServicio === '1') {
-                valor = dayOfWeek === 7 ? valoresEstancias.desayuno : valoresEstancias.desayuno;
+                valor = dayOfWeek === 7 ? costos.desayuno : costos.desayuno;
             } else if (selectedServicio === '2') {
-                valor = dayOfWeek === 7 ? valoresEstancias.especial : valoresEstancias.almuerzo;
+                valor = dayOfWeek === 7 ? costos.especial : costos.almuerzo;
             } else if (selectedServicio === '3') {
-                valor = valoresEstancias.cena;
+                valor = costos.cena;
             }
 
             valorServicioInput.value = formatearMoneda(valor);
@@ -129,86 +133,77 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
+    // Inicializar tipo de servicio y valores
     configurarServicioPorHora();
-    actualizarValorServicio();
+    await actualizarValorServicio();
 
     tipoServicioSelect.addEventListener('change', actualizarValorServicio);
     fechaServicioInput.addEventListener('change', actualizarValorServicio);
-});
 
-document.addEventListener('DOMContentLoaded', function () {
-    consultarCostoFondosEstancia();
-});
+    // Habilitar el botón solo cuando los campos necesarios estén llenos
+    document.getElementById('form-servicios').addEventListener('input', function () {
+        const socioId = document.getElementById('buscar-socio').value;
+        const valorComida = document.getElementById('valor-servicio').value;
+        const cantidadEstancias = document.getElementById('cantidad-estancias').value;
+        const fechaServicio = document.getElementById('fecha-servicio').value;
 
-// Habilitar el botón solo cuando los campos necesarios estén llenos
-document.getElementById('form-servicios').addEventListener('input', function () {
-    const socioId = document.getElementById('buscar-socio').value;
-    const valorComida = document.getElementById('valor-servicio').value;
-    const cantidadEstancias = document.getElementById('cantidad-estancias').value;
-    const fechaServicio = document.getElementById('fecha-servicio').value;
+        // Habilitar el botón si todos los campos requeridos tienen valores
+        if (socioId && valorComida && cantidadEstancias && fechaServicio) {
+            document.getElementById('agregar-servicio-btn').disabled = false;
+        } else {
+            document.getElementById('agregar-servicio-btn').disabled = true;
+        }
+    });
 
-    // Habilitar el botón si todos los campos requeridos tienen valores
-    if (socioId && valorComida && cantidadEstancias && fechaServicio) {
-        document.getElementById('agregar-servicio-btn').disabled = false;
-    } else {
-        document.getElementById('agregar-servicio-btn').disabled = true;
-    }
-});
+    // Manejar el envío del formulario
+    document.getElementById('form-servicios').addEventListener('submit', async function (e) {
+        e.preventDefault(); // Prevenir el comportamiento predeterminado de enviar el formulario
 
-// Manejar el envío del formulario
-document.getElementById('form-servicios').addEventListener('submit', function (e) {
-    e.preventDefault(); // Prevenir el comportamiento predeterminado de enviar el formulario
+        // Obtener los valores del formulario
+        const socioId = document.getElementById('buscar-socio').value;
+        const cantidad = document.getElementById('cantidad-estancias').value;
+        const claseComida = document.getElementById('tipo-servicio').value;
+        const fecha = document.getElementById('fecha-servicio').value;
+        const valorComida = document.getElementById('valor-servicio').value;
+        const pago = document.getElementById('pagado').checked;
 
-    // Obtener los valores del formulario
-    const socioId = document.getElementById('buscar-socio').value;
-    const cantidad = document.getElementById('cantidad-estancias').value;
-    const claseComida = document.getElementById('tipo-servicio').value;
-    const fecha = document.getElementById('fecha-servicio').value;
-    const valorComida = document.getElementById('valor-servicio').value;
-    const pago = document.getElementById('pagado').checked;
-    // Crear el objeto de datos
-    const data = {
-        costoFondosEstanciaId: costos.id,
-        socioId: socioId,
-        cantidad: cantidad,
-        claseComida: claseComida,
-        fecha: fecha,
-        valorComida: convertirMonedaANumero(valorComida),
-        pago: pago
-    };
-    // Hacer la solicitud POST
-    fetch('/comidas/crear', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    })
-        .then(response => response.json())
-        .then(data => {
-            // Aquí puedes manejar la respuesta, como mostrar un mensaje de éxito
-            alert('Servicio agregado exitosamente');
+        if (!costos) {
+            costos = await consultarCostoFondosEstancia();
+        }
+
+        // Crear el objeto de datos
+        const data = {
+            costoFondosEstanciaId: costos.id,
+            socioId: socioId,
+            cantidad: cantidad,
+            claseComida: claseComida,
+            fecha: fecha,
+            valorComida: convertirMonedaANumero(valorComida),
+            pago: pago
+        };
+
+        // Hacer la solicitud POST
+        fetch('/comidas/crear', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
         })
-        .catch(error => {
-            // Manejar errores
-            console.error('Error al agregar servicio:', error);
-            alert('Hubo un error al agregar el servicio');
-        });
+            .then(response => response.json())
+            .then(data => {
+                // Aquí puedes manejar la respuesta, como mostrar un mensaje de éxito
+                alert('Servicio agregado exitosamente');
+            })
+            .catch(error => {
+                // Manejar errores
+                console.error('Error al agregar servicio:', error);
+                alert('Hubo un error al agregar el servicio');
+            });
+    });
 });
 
-function obtenerComida(numero) {
-    switch (numero) {
-        case 1:
-            return "Desayuno";
-        case 2:
-            return "Almuerzo";
-        case 3:
-            return "Cena";
-        default:
-            return "Opción no válida";
-    }
-}
-
+// Funciones auxiliares
 function obtenerMesAnioActual() {
     const fechaActual = new Date();
     const año = fechaActual.getFullYear();
@@ -218,14 +213,13 @@ function obtenerMesAnioActual() {
 
 async function consultarCostoFondosEstancia() {
     const mesAnio = obtenerMesAnioActual();
-
     try {
         const response = await fetch(`configurar-costos/consultar/fecha/${mesAnio}`);
         if (!response.ok) {
             throw new Error('No se encontró información para la fecha proporcionada.');
         }
         const data = await response.json();
-        costos = data;
+        costos = data; // Almacena los costos globalmente
         return data;
     } catch (error) {
         console.error('Error al consultar los costos:', error.message);

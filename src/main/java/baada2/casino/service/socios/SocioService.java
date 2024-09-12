@@ -9,6 +9,7 @@ import baada2.casino.repository.socio.SocioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -125,4 +126,22 @@ public class SocioService {
         socioDTO.setFomento(socioEntity.isFomento());
         return socioDTO;
     }
+
+    public SocioEntity actualizarSocio(SocioFomentoDTO socioDTO) {
+        Optional<SocioEntity> optionalSocio = socioRepository.findByDocumento(socioDTO.getDocumento());
+
+        if (optionalSocio.isPresent()) {
+            SocioEntity socioEntity = optionalSocio.get();
+            // Actualizar los valores de los campos booleanos
+            socioEntity.setFondoCasino(socioDTO.isFondoCasino());
+            socioEntity.setFomento(socioDTO.isFomento());
+            socioEntity.setFondoHabitacional(socioDTO.isFondoHabitacional());
+
+            // Guardar la entidad actualizada en la base de datos
+            return socioRepository.save(socioEntity);
+        } else {
+            throw new EntityNotFoundException("Socio no encontrado");
+        }
+    }
+
 }

@@ -16,4 +16,8 @@ public class SocioFomentoDTO {
     private boolean fomento=false;
     private boolean fondoHabitacional=false;
 
+    private double fondoCasinoValor=0;
+    private double fomentoValor=0;
+    private double fondoHabitacionalValor=0;
+
 }

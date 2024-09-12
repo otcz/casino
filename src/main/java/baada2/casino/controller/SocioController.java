@@ -1,10 +1,7 @@
 package baada2.casino.controller;
 
 import baada2.casino.entity.comida.TablaDTO;
-import baada2.casino.entity.socio.LoginRequestDTO;
-import baada2.casino.entity.socio.SocioDTO;
-import baada2.casino.entity.socio.SocioFomentoDTO;
-import baada2.casino.entity.socio.SocioRegistroDTO;
+import baada2.casino.entity.socio.*;
 import baada2.casino.service.comida.ComidaService;
 import baada2.casino.service.socios.SocioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +23,6 @@ public class SocioController {
 
     @PostMapping("/crear")
     public ResponseEntity<SocioRegistroDTO> crearSocio(@RequestBody SocioRegistroDTO socioDTO) {
-        System.out.println(socioDTO.toString()+"_________________________");
         try {
             SocioRegistroDTO nuevoSocio = socioService.crearSocio(socioDTO);
             return new ResponseEntity<>(nuevoSocio, HttpStatus.CREATED);
@@ -34,6 +30,27 @@ public class SocioController {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error al crear socio", e);
         }
     }
+
+    @PutMapping("/actualizar-servicios")
+    public ResponseEntity<SocioFomentoDTO> editarSocio(@RequestBody SocioFomentoDTO socioDTO) {
+        try {
+            // Actualizar el socio
+            SocioEntity socioExistente = socioService.actualizarSocio(socioDTO);
+
+            // Verificar si el documento está vacío
+            if (socioExistente.getDocumento().isEmpty()) {
+                return ResponseEntity.ok().build(); // Retorna 200 OK sin cuerpo
+            } else {
+                // Aquí se pueden manejar otros casos si es necesario
+                return ResponseEntity.ok().body(socioDTO); // Retorna 200 OK con el objeto actualizado
+            }
+        } catch (Exception e) {
+            // Manejo centralizado de errores
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error al actualizar socio", e);
+        }
+    }
+
+
     @PostMapping("/login")
     public ResponseEntity<SocioDTO> login(@RequestBody LoginRequestDTO loginRequest) {
         try {
