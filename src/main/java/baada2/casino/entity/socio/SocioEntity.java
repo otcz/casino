@@ -20,7 +20,7 @@ public class SocioEntity {
     private String documento;
 
     @Column(name = "idcard", nullable = true)
-    private String string;
+    private String idcard;
 
     @Column(name = "grado", nullable = false)
     private String grado;

@@ -2,6 +2,7 @@ package baada2.casino.service.socios;
 
 import baada2.casino.entity.socio.SocioDTO;
 import baada2.casino.entity.socio.SocioEntity;
+import baada2.casino.entity.socio.SocioFomentoDTO;
 import baada2.casino.entity.socio.SocioRegistroDTO;
 import baada2.casino.repository.comida.ComidaRepository;
 import baada2.casino.repository.socio.SocioRepository;
@@ -75,6 +76,23 @@ public class SocioService {
             SocioEntity socioEntity = socioEntityOptional.get();
             // Aquí debes convertir SocioEntity a SocioDTO. Supongamos que tienes un método de mapeo:
             return convertirEntidadADTO(socioEntity);
+        } else {
+            return null; // O podrías lanzar una excepción
+        }
+    }
+
+    public SocioFomentoDTO getSocioFomentosNombreCard(String documento) {
+        Optional<SocioEntity> socioEntityOptional = socioRepository.findByDocumento(documento);
+        SocioFomentoDTO socioFomentoDTO= new SocioFomentoDTO();
+        if (socioEntityOptional.isPresent()) {
+            SocioEntity socioEntity = socioEntityOptional.get();
+            socioFomentoDTO.setFomento(socioEntity.isFomento());
+            socioFomentoDTO.setFondoCasino(socioEntity.isFondoCasino());
+            socioFomentoDTO.setFondoHabitacional(socioEntity.isFondoHabitacional());
+            socioFomentoDTO.setDocumento(socioEntity.getDocumento());
+            socioFomentoDTO.setIdCard(socioEntity.getIdcard());
+            socioFomentoDTO.setNombre(socioEntity.getNombre());
+            return socioFomentoDTO;
         } else {
             return null; // O podrías lanzar una excepción
         }

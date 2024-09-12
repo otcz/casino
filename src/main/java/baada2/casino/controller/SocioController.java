@@ -1,9 +1,9 @@
 package baada2.casino.controller;
 
-import baada2.casino.entity.comida.ComidaDTO;
 import baada2.casino.entity.comida.TablaDTO;
 import baada2.casino.entity.socio.LoginRequestDTO;
 import baada2.casino.entity.socio.SocioDTO;
+import baada2.casino.entity.socio.SocioFomentoDTO;
 import baada2.casino.entity.socio.SocioRegistroDTO;
 import baada2.casino.service.comida.ComidaService;
 import baada2.casino.service.socios.SocioService;
@@ -60,6 +60,7 @@ public class SocioController {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error al obtener socios", e);
         }
     }
+
     @GetMapping("/consultarid")
     public ResponseEntity<SocioDTO> obtenerSocioPorDocumento(@RequestParam("documento") String documento) {
         try {
@@ -73,6 +74,18 @@ public class SocioController {
         }
     }
 
+    @GetMapping("/consultaridfomento")
+    public ResponseEntity<SocioFomentoDTO> obtenerSocioFomento(@RequestParam("documento") String documento) {
+        try {
+            SocioFomentoDTO socio = socioService.getSocioFomentosNombreCard(documento);
+            if (socio == null) {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND); // No se encontró el socio
+            }
+            return new ResponseEntity<>(socio, HttpStatus.OK);
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error al obtener socio", e);
+        }
+    }
 
     @GetMapping("/comida/{documento}")
     public ResponseEntity<TablaDTO> obtenerComidasPorSocio(@PathVariable String documento) {

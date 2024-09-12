@@ -176,7 +176,6 @@ document.getElementById('form-servicios').addEventListener('submit', function (e
         valorComida: convertirMonedaANumero(valorComida),
         pago: pago
     };
-    console.log(data)
     // Hacer la solicitud POST
     fetch('/comidas/crear', {
         method: 'POST',
@@ -226,7 +225,6 @@ async function consultarCostoFondosEstancia() {
             throw new Error('No se encontró información para la fecha proporcionada.');
         }
         const data = await response.json();
-        console.log(data)
         costos = data;
         return data;
     } catch (error) {

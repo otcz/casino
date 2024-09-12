@@ -109,6 +109,7 @@
     <section id="habitacion-fomento" class="hidden-section">
         <div class="form-container">
             <h2>Habitación y Fomentos</h2>
+
             <form id="form-habitacion-fomento">
 
                 <!-- Campo de búsqueda de socio -->
@@ -117,36 +118,51 @@
                     <div class="search-bar">
                         <input type="text" id="buscar-socio2" name="buscar-socio" placeholder="Ingrese documento de identidad">
                         <button type="button" id="buscar-btn2">Buscar</button>
-                        <div class="rfid-checkbox">
-                            <input type="checkbox" id="rfid-check2" onchange="toggleSocioInputHabitacionFomento()" name="rfid-check">
-                            <label for="rfid-check">RFDI</label>
+                    </div>
+                </div>
+
+                <!-- Mostrar nombre del socio con checkbox -->
+                <div class="form-group">
+                    <label for="nombre-socio">Nombre del Socio</label>
+                    <div class="input-checkbox-group">
+                        <input type="text" id="nombre-socio2" name="nombre-socio" placeholder="Nombre del socio" disabled>
+                    </div>
+                </div>
+
+                <!-- Módulo para opciones adicionales (fondo habitacional) -->
+                <div class="form-group">
+                    <label>Fondo habitacional</label>
+                    <div class="input-checkbox-group">
+                        <input type="number" id="valor-habitacion" name="valor-habitacion" min="0" placeholder="Valor habitación" disabled readonly>
+                        <div class="checkbox-wrapper">
+                            <input type="checkbox" id="valor-habitacion-check" name="valor-habitacion-check" disabled>
+                            <label for="valor-habitacion-check">Activo</label>
                         </div>
                     </div>
                 </div>
 
-
-                <!-- Mostrar nombre del socio -->
-                <div class="form-group">
-                    <label for="nombre-socio">Nombre del Socio</label>
-                    <input type="text" id="nombre-socio2" name="nombre-socio" placeholder="Nombre del socio" disabled>
-                </div>
-
-
-                <!-- Módulo para opciones adicionales -->
-                <div class="form-group">
-                    <label>Fondo habitacional</label>
-                    <input type="number" id="valor-habitacion" name="valor-habitacion" min="0" placeholder="Valor habitación" disabled>
-                </div>
-
-                <!-- Nuevo campo: Fondo de Casino -->
+                <!-- Fondo de Casino con checkbox -->
                 <div class="form-group">
                     <label>Fondo de Casino</label>
-                    <input type="number" id="valor-casino" name="valor-casino" min="0" placeholder="Valor casino" disabled>
+                    <div class="input-checkbox-group">
+                        <input type="number" id="valor-casino" name="valor-casino" min="0" placeholder="Valor casino" disabled readonly>
+                        <div class="checkbox-wrapper">
+                            <input type="checkbox" id="valor-casino-check" name="valor-casino-check" disabled>
+                            <label for="valor-casino-check">Activo</label>
+                        </div>
+                    </div>
                 </div>
 
+                <!-- Fomento con checkbox -->
                 <div class="form-group">
                     <label>Fomento</label>
-                    <input type="number" id="valor-fomento" name="valor-fomento" min="0" placeholder="Valor fomento" disabled>
+                    <div class="input-checkbox-group">
+                        <input type="number" id="valor-fomento" name="valor-fomento" min="0" placeholder="Valor fomento" disabled readonly>
+                        <div class="checkbox-wrapper">
+                            <input type="checkbox" id="valor-fomento-check" name="valor-fomento-check" disabled>
+                            <label for="valor-fomento-check">Activo</label>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="form-group">
@@ -154,6 +170,8 @@
                 </div>
 
             </form>
+
+
         </div>
     </section>
 
