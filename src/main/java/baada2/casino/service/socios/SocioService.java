@@ -124,8 +124,8 @@ public class SocioService {
     private SocioDTO convertirEntidadADTOSocio(SocioEntity socioEntity) {
         SocioDTO socioDTO = new SocioDTO();
         socioDTO.setGrado(socioEntity.getGrado());
-        socioDTO.setId(Long.valueOf(socioEntity.getIdcard()));
-        socioDTO.setIdCard(Long.valueOf(socioEntity.getIdcard()));
+        socioDTO.setId((socioEntity.getDocumento()));
+        socioDTO.setIdCard((socioEntity.getIdcard()));
         socioDTO.setNombre(socioEntity.getNombre());
         socioDTO.setEstado(socioEntity.getEstado());
         socioDTO.setDocumento(socioEntity.getDocumento());

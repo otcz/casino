@@ -184,7 +184,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         })
             .then(response => response.json())
             .then(data => {
-                alert('Servicio agregado exitosamente');
+                decirNombre("Bienvenido, "+document.getElementById('nombre-socio').value);
             })
             .catch(error => {
                 console.error('Error al agregar servicio:', error);
@@ -192,11 +192,17 @@ document.addEventListener('DOMContentLoaded', async function () {
             });
     });
 
-    // Evento de lectura de la lectora RFID
+    let isProcessing = false; // Variable de bloqueo para evitar repeticiones
+
+
     buscarSocioInput.addEventListener('change', function () {
+        if (isProcessing) return; // Evitar que el evento se dispare de nuevo mientras se está procesando
+        isProcessing = true; // Bloquear el evento durante el procesamiento
+
         const documentoIdentidad = buscarSocioInput.value.trim();
 
-        if (rfidCheck.checked && documentoIdentidad !== '') {
+        // Verificar si el campo tiene un valor suficiente, por ejemplo, longitud mínima de caracteres
+        if (documentoIdentidad.length >= 8 && rfidCheck.checked) {  // Supongamos que el documento tiene al menos 8 dígitos
             fetch(`/socios/consultarid?documento=${documentoIdentidad}`)
                 .then(response => {
                     if (!response.ok) {
@@ -223,7 +229,6 @@ document.addEventListener('DOMContentLoaded', async function () {
                                 valorComida: convertirMonedaANumero(valorServicioInput.value),
                                 pago: document.getElementById('pagado').checked,
                                 costoFondosEstanciaId: costos.id,
-
                             })
                         });
                     } else {
@@ -234,19 +239,31 @@ document.addEventListener('DOMContentLoaded', async function () {
                 .then(response => response.json())
                 .then(data => {
                     if (data) {
+                        decirNombre("Bienvenido, " + document.getElementById('nombre-socio').value);
 
-                        decirNombre("Bienvenido, "+document.getElementById('nombre-socio').value);
-                        document.getElementById('buscar-socio2').value="";
-
+                        setTimeout(() => {
+                            buscarSocioInput.value = '';  // Limpia el campo
+                            buscarSocioInput.focus();     // Enfoca el campo para una nueva entrada
+                        }, 0);
                     }
                 })
                 .catch(error => {
                     console.error('Error al procesar:', error);
                     alert('Ocurrió un error al procesar los datos.');
                     toggleFields(false);
+                })
+                .finally(() => {
+                    // Reactivar el evento después de finalizar el procesamiento
+                    isProcessing = false;
                 });
+        } else {
+            alert('Por favor, ingrese un documento válido.');
+            isProcessing = false; // Desbloquear si no cumple con las condiciones
         }
     });
+
+
+
 });
 
 // Funciones auxiliares

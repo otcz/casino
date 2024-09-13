@@ -17,8 +17,8 @@ public class SocioDTO {
     private String nombre;
     private String documento;
     private String estado;
-    private Long id;
-    private Long idCard;
+    private String id;
+    private String idCard;
     private String password;
 
     private boolean fondoCasino=false;

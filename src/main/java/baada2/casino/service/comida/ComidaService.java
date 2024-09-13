@@ -50,7 +50,7 @@ public class ComidaService {
         }
 
         // Si después de ambas búsquedas sigue siendo null, lanza una excepción
-        if (socio == null) {
+        else if (socio == null) {
             throw new EntityNotFoundException("Socio no encontrado con documento o idcard: " + comidaDTO.getSocioId());
         }
 
