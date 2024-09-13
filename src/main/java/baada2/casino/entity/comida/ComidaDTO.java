@@ -18,6 +18,6 @@ public class ComidaDTO {
     private boolean pago;
     private double valorComida;
 
-    private Long socioId;
+    private String socioId;
     private Long costoFondosEstanciaId;
 }

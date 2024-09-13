@@ -1,5 +1,6 @@
 let costos = null;  // Inicializamos la variable
 
+const rfidCheck = document.getElementById('rfid-check');
 document.addEventListener('DOMContentLoaded', async function () {
     const buscarBtn = document.getElementById('buscar-btn');
     const buscarSocioInput = document.getElementById('buscar-socio');
@@ -59,7 +60,6 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     toggleFields(false);
 
-    // Fecha actual
     const today = new Date();
     const yyyy = today.getFullYear();
     const mm = String(today.getMonth() + 1).padStart(2, '0');
@@ -108,7 +108,6 @@ document.addEventListener('DOMContentLoaded', async function () {
 
         try {
             if (!costos) {
-                // Consultar solo si no se ha hecho antes
                 costos = await consultarCostoFondosEstancia();
             }
             if (!costos) {
@@ -133,21 +132,18 @@ document.addEventListener('DOMContentLoaded', async function () {
         }
     }
 
-    // Inicializar tipo de servicio y valores
     configurarServicioPorHora();
     await actualizarValorServicio();
 
     tipoServicioSelect.addEventListener('change', actualizarValorServicio);
     fechaServicioInput.addEventListener('change', actualizarValorServicio);
 
-    // Habilitar el botón solo cuando los campos necesarios estén llenos
     document.getElementById('form-servicios').addEventListener('input', function () {
         const socioId = document.getElementById('buscar-socio').value;
         const valorComida = document.getElementById('valor-servicio').value;
         const cantidadEstancias = document.getElementById('cantidad-estancias').value;
         const fechaServicio = document.getElementById('fecha-servicio').value;
 
-        // Habilitar el botón si todos los campos requeridos tienen valores
         if (socioId && valorComida && cantidadEstancias && fechaServicio) {
             document.getElementById('agregar-servicio-btn').disabled = false;
         } else {
@@ -155,11 +151,9 @@ document.addEventListener('DOMContentLoaded', async function () {
         }
     });
 
-    // Manejar el envío del formulario
     document.getElementById('form-servicios').addEventListener('submit', async function (e) {
-        e.preventDefault(); // Prevenir el comportamiento predeterminado de enviar el formulario
+        e.preventDefault();
 
-        // Obtener los valores del formulario
         const socioId = document.getElementById('buscar-socio').value;
         const cantidad = document.getElementById('cantidad-estancias').value;
         const claseComida = document.getElementById('tipo-servicio').value;
@@ -171,7 +165,6 @@ document.addEventListener('DOMContentLoaded', async function () {
             costos = await consultarCostoFondosEstancia();
         }
 
-        // Crear el objeto de datos
         const data = {
             costoFondosEstanciaId: costos.id,
             socioId: socioId,
@@ -182,7 +175,6 @@ document.addEventListener('DOMContentLoaded', async function () {
             pago: pago
         };
 
-        // Hacer la solicitud POST
         fetch('/comidas/crear', {
             method: 'POST',
             headers: {
@@ -192,14 +184,68 @@ document.addEventListener('DOMContentLoaded', async function () {
         })
             .then(response => response.json())
             .then(data => {
-                // Aquí puedes manejar la respuesta, como mostrar un mensaje de éxito
                 alert('Servicio agregado exitosamente');
             })
             .catch(error => {
-                // Manejar errores
                 console.error('Error al agregar servicio:', error);
                 alert('Hubo un error al agregar el servicio');
             });
+    });
+
+    // Evento de lectura de la lectora RFID
+    buscarSocioInput.addEventListener('change', function () {
+        const documentoIdentidad = buscarSocioInput.value.trim();
+
+        if (rfidCheck.checked && documentoIdentidad !== '') {
+            fetch(`/socios/consultarid?documento=${documentoIdentidad}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Socio no encontrado');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data) {
+                        nombreSocioInput.value = data.nombre;
+                        toggleFields(true); // Habilitar campos
+                        actualizarValorServicio();
+
+                        return fetch('/comidas/crear', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                socioId: documentoIdentidad,
+                                claseComida: tipoServicioSelect.value,
+                                cantidad: cantidadEstanciasInput.value,
+                                fecha: fechaServicioInput.value,
+                                valorComida: convertirMonedaANumero(valorServicioInput.value),
+                                pago: document.getElementById('pagado').checked,
+                                costoFondosEstanciaId: costos.id,
+
+                            })
+                        });
+                    } else {
+                        alert('Socio no encontrado.');
+                        toggleFields(false);
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data) {
+
+                        decirNombre("Bienvenido, "+document.getElementById('nombre-socio').value);
+                        document.getElementById('buscar-socio2').value="";
+
+                    }
+                })
+                .catch(error => {
+                    console.error('Error al procesar:', error);
+                    alert('Ocurrió un error al procesar los datos.');
+                    toggleFields(false);
+                });
+        }
     });
 });
 
@@ -219,23 +265,20 @@ async function consultarCostoFondosEstancia() {
             throw new Error('No se encontró información para la fecha proporcionada.');
         }
         const data = await response.json();
-        costos = data; // Almacena los costos globalmente
+        costos = data;
         return data;
     } catch (error) {
-        console.error('Error al consultar los costos:', error.message);
+        console.error('Error al consultar costos fondos estancia:', error);
         return null;
     }
 }
 
 function convertirMonedaANumero(valorFormateado) {
-    // Elimina el símbolo de la moneda y los separadores de miles
-    const valorNumerico = valorFormateado
-        .replace(/[^0-9,.]/g, '')  // Elimina todo lo que no sea número, punto o coma
-        .replace(/,/g, '.')         // Reemplaza la coma por un punto para el formato decimal
-        .replace(/^\./, '0.')      // Asegura que el punto decimal no esté al inicio
-        .replace(/(?<=\d)\.(?=\d)/g, '')  // Elimina puntos en medio del número
-        .trim();                    // Elimina espacios extra
+    return Number(valorFormateado.replace(/\D/g, ''));
+}
 
-    // Convierte a número flotante
-    return parseFloat(valorNumerico) || 0;  // Devuelve 0 si el resultado es NaN
+function decirNombre(texto) {
+    const speech = new SpeechSynthesisUtterance(texto);
+    speech.lang = 'es-ES';  // Puedes cambiar el idioma si es necesario
+    window.speechSynthesis.speak(speech);
 }

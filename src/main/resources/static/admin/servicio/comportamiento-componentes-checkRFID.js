@@ -12,7 +12,6 @@ function toggleSocioInputServicios() {
 
     // Si el checkbox está seleccionado, deshabilitar el campo de búsqueda de socio y habilitar los demás campos
     if (rfidCheck.checked) {
-        buscarSocio.setAttribute('readonly', true); // Desactivar campo de búsqueda de socio
         buscarSocio.value = '';
         nombreSocio.value='';
         // Habilitar los campos relacionados
@@ -26,20 +25,6 @@ function toggleSocioInputServicios() {
         cantidadEstancias.setAttribute('disabled', true);
         tipoServicio.setAttribute('disabled', true);
         fechaServicio.setAttribute('disabled', true);
-    }
-}
-
-// Función para manejar el estado del campo de búsqueda de socio en la sección "Habitación y Fomentos"
-function toggleSocioInputHabitacionFomento() {
-    const rfidCheck2 = document.getElementById('rfid-check2');
-    const buscarSocio2 = document.getElementById('buscar-socio2');
-
-    // Si el checkbox está seleccionado, deshabilitar el campo, si no, habilitarlo
-    if (rfidCheck2.checked) {
-        buscarSocio2.textContent="";
-        buscarSocio2.setAttribute('readonly', true);
-    } else {
-        buscarSocio2.removeAttribute('readonly');
     }
 }
 

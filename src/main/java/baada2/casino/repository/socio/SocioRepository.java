@@ -6,4 +6,6 @@ import java.util.Optional;
 
 public interface SocioRepository extends JpaRepository<SocioEntity, Long> {
     Optional<SocioEntity> findByDocumento(String documento);
+
+    Optional<SocioEntity> findByIdcard(String idcard);
 }

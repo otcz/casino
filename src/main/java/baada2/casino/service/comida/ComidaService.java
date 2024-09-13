@@ -11,6 +11,7 @@ import baada2.casino.repository.socio.SocioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -40,8 +41,18 @@ public class ComidaService {
         comidaEntity.setFecha(comidaDTO.getFecha());
         comidaEntity.setPago(comidaDTO.isPago());
 
-        // Buscar el socio por documento
-        SocioEntity socio = socioRepository.findByDocumento(String.valueOf(comidaDTO.getSocioId())).orElseThrow(() -> new RuntimeException("Socio no encontrado con documento: " + comidaDTO.getSocioId()));
+        // Busca por el documento primero
+        SocioEntity socio = socioRepository.findByDocumento(comidaDTO.getSocioId()).orElse(null);
+
+        // Si no encuentra por documento, intenta con idcard
+        if (socio == null) {
+            socio = socioRepository.findByIdcard(comidaDTO.getSocioId()).orElse(null);
+        }
+
+        // Si después de ambas búsquedas sigue siendo null, lanza una excepción
+        if (socio == null) {
+            throw new EntityNotFoundException("Socio no encontrado con documento o idcard: " + comidaDTO.getSocioId());
+        }
 
         // Buscar el socio por id
         CostoFondosEstanciaEntity costoFondosEstanciaEntity = costoFondosEstanciaRepository.findById((comidaDTO.getCostoFondosEstanciaId())).orElseThrow(() -> new RuntimeException("Socio no encontrado con documento: " + comidaDTO.getCostoFondosEstanciaId()));
@@ -66,7 +77,7 @@ public class ComidaService {
         comidaDTO.setValorComida(comidaEntity.getValorComida());
         comidaDTO.setFecha(comidaEntity.getFecha());
         comidaDTO.setPago(comidaEntity.isPago());
-        comidaDTO.setSocioId(Long.valueOf(comidaEntity.getSocio().getDocumento()));
+        comidaDTO.setSocioId((comidaEntity.getSocio().getDocumento()));
         return comidaDTO;
     }
 

@@ -6,7 +6,7 @@
     <title>Agregar Servicios</title>
     <link rel="stylesheet" href="servicio.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <script src="RFID.js"></script>
+    <script src="comportamiento-componentes-checkRFID.js"></script>
     <script src="ServicioBuscarSocio.js"></script>
     <link rel="stylesheet" href="../../configuracion.css">
 
@@ -28,6 +28,7 @@
         <ul>
             <li><a href="#" data-section="alimentacion"><i class="fas fa-utensils"></i> Alimentación</a></li>
             <li><a href="#" data-section="habitacion-fomento"><i class="fas fa-bed"></i> Habitación y Fomentos</a></li>
+            <li><a href="#" data-section="tarjetas"><i class="fas fa-credit-card"></i> Tarjetas</a></li>
             <li><a href="#" data-section="bar"><i class="fas fa-glass-martini-alt"></i> Bar</a></li>
             <li><a href="#" data-section="cobrar"><i class="fas fa-cash-register"></i> Cobrar</a></li>
             <li><a href="#" data-section="configuraciones"><i class="fas fa-cogs"></i> Configuraciones</a></li>
@@ -58,7 +59,7 @@
                 <!-- Campo de nombre del socio -->
                 <div class="form-group">
                     <label for="nombre-socio">Nombre del Socio</label>
-                    <input type="text" id="nombre-socio" name="nombre-socio" placeholder="Nombre del socio" readonly>
+                    <input type="text" id="nombre-socio" name="nombre-socio" placeholder="Nombre del socio" disabled>
                 </div>
 
                 <div class="form-group">
@@ -174,6 +175,40 @@
         </div>
     </section>
 
+    <section id="tarjetas" class="hidden-section">
+        <div class="form-container">
+            <h2>Gestión de Tarjetas</h2>
+
+            <form id="form-tarjetas">
+                <!-- Campo de búsqueda de socio -->
+                <div class="form-group search-group">
+                    <label for="buscar-socio">Buscar Socio (Documento de Identidad)</label>
+                    <div class="search-bar">
+                        <input type="text" id="buscar-socio3" name="buscar-socio" placeholder="Ingrese documento de identidad">
+                        <button type="button" id="buscar-btn3">Buscar</button>
+                    </div>
+                </div>
+
+                <!-- Campo de nombre del socio -->
+                <div class="form-group">
+                    <label for="nombre-socio">Nombre del Socio</label>
+                    <input type="text" id="nombre-socio3" name="nombre-socio" placeholder="Nombre del socio" disabled>
+                </div>
+
+                <!-- Campo de número de tarjeta -->
+                <div class="form-group">
+                    <label for="numero-tarjeta">Número de Tarjeta</label>
+                    <input type="text" id="numero-tarjeta" name="numero-tarjeta" placeholder="Ingrese número de tarjeta">
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" id="agregar-tarjeta-btn">Agregar Tarjeta</button>
+                </div>
+
+            </form>
+        </div>
+    </section>
+
     <section id="bar" class="hidden-section">
         <h2>Bar</h2>
         <p>Gestiona el consumo en el bar desde aquí.</p>
@@ -268,4 +303,5 @@
 <script src="registrar-comida.js"></script>
 <script src="configuracion.js"></script>
 <script src="habitacion-fomento-fondo.js"></script>
+<script src="agregar-tarjeta.js"></script>
 </html>

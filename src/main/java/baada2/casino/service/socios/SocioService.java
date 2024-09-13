@@ -71,20 +71,28 @@ public class SocioService {
 
 
     public SocioDTO obtenerSocioPorDocumento(String documento) {
-        Optional<SocioEntity> socioEntityOptional = socioRepository.findByDocumento(documento);
+        // Busca por el documento primero
+        SocioEntity socioEntity = socioRepository.findByDocumento(documento).orElse(null);
 
-        if (socioEntityOptional.isPresent()) {
-            SocioEntity socioEntity = socioEntityOptional.get();
-            // Aquí debes convertir SocioEntity a SocioDTO. Supongamos que tienes un método de mapeo:
-            return convertirEntidadADTO(socioEntity);
-        } else {
-            return null; // O podrías lanzar una excepción
+        // Si no encuentra por documento, intenta con idcard
+        if (socioEntity == null) {
+            socioEntity = socioRepository.findByIdcard(documento).orElse(null);
         }
+
+        // Si después de ambas búsquedas sigue siendo null, lanza una excepción
+        if (socioEntity == null) {
+            throw new EntityNotFoundException("Socio no encontrado con documento o idcard: " + documento);
+        }
+
+        // Si se encontró, convierte la entidad a DTO
+        return convertirEntidadADTOSocio(socioEntity);
     }
+
+
 
     public SocioFomentoDTO getSocioFomentosNombreCard(String documento) {
         Optional<SocioEntity> socioEntityOptional = socioRepository.findByDocumento(documento);
-        SocioFomentoDTO socioFomentoDTO= new SocioFomentoDTO();
+        SocioFomentoDTO socioFomentoDTO = new SocioFomentoDTO();
         if (socioEntityOptional.isPresent()) {
             SocioEntity socioEntity = socioEntityOptional.get();
             socioFomentoDTO.setFomento(socioEntity.isFomento());
@@ -105,7 +113,6 @@ public class SocioService {
         socioDTO.setGrado(socioEntity.getGrado());
         socioDTO.setNombre(socioEntity.getNombre());
         socioDTO.setEstado(socioEntity.getEstado());
-        socioDTO.setPassword(socioEntity.getPassword());
         socioDTO.setDocumento(socioEntity.getDocumento());
 
         socioDTO.setFondoCasino(socioEntity.isFondoCasino());
@@ -113,6 +120,22 @@ public class SocioService {
         socioDTO.setFomento(socioEntity.isFomento());
         return socioDTO;
     }
+
+    private SocioDTO convertirEntidadADTOSocio(SocioEntity socioEntity) {
+        SocioDTO socioDTO = new SocioDTO();
+        socioDTO.setGrado(socioEntity.getGrado());
+        socioDTO.setId(Long.valueOf(socioEntity.getIdcard()));
+        socioDTO.setIdCard(Long.valueOf(socioEntity.getIdcard()));
+        socioDTO.setNombre(socioEntity.getNombre());
+        socioDTO.setEstado(socioEntity.getEstado());
+        socioDTO.setDocumento(socioEntity.getDocumento());
+
+        socioDTO.setFondoCasino(socioEntity.isFondoCasino());
+        socioDTO.setFondoHabitacional(socioEntity.isFondoHabitacional());
+        socioDTO.setFomento(socioEntity.isFomento());
+        return socioDTO;
+    }
+
     private SocioDTO mapToDTO(SocioEntity socioEntity) {
         SocioDTO socioDTO = new SocioDTO();
         socioDTO.setGrado(socioEntity.getGrado());
@@ -136,6 +159,7 @@ public class SocioService {
             socioEntity.setFondoCasino(socioDTO.isFondoCasino());
             socioEntity.setFomento(socioDTO.isFomento());
             socioEntity.setFondoHabitacional(socioDTO.isFondoHabitacional());
+            socioEntity.setIdcard(socioDTO.getIdCard());
 
             // Guardar la entidad actualizada en la base de datos
             return socioRepository.save(socioEntity);
