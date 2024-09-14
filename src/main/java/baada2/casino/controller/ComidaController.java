@@ -18,7 +18,6 @@ public class ComidaController {
 
     @PostMapping("/crear")
     public ResponseEntity<ComidaDTO> crearComida(@RequestBody ComidaDTO comidaDTO) {
-        System.out.println(comidaDTO.toString());
         ComidaDTO nuevaComida = comidaService.crearComida(comidaDTO);
         return new ResponseEntity<>(nuevaComida, HttpStatus.CREATED);
     }

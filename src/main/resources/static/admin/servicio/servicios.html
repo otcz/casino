@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="servicio.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <script src="comportamiento-componentes-checkRFID.js"></script>
-    <script src="ServicioBuscarSocio.js"></script>
     <link rel="stylesheet" href="../../configuracion.css">
 
 </head>
@@ -38,20 +37,18 @@
 
 <div class="content">
     <section id="alimentacion" class="active-section">
-
-
         <div class="form-container">
             <h2>Agregar Servicios</h2>
+
             <form id="form-servicios">
                 <!-- Campo de búsqueda de socio -->
                 <div class="form-group search-group">
                     <label for="buscar-socio">Buscar Socio (Documento de Identidad)</label>
                     <div class="search-bar">
-                        <input type="text" id="buscar-socio" name="buscar-socio" placeholder="Ingrese documento de identidad">
-                        <button type="button" id="buscar-btn">Buscar</button>
+                        <input type="text" id="buscar-socio" name="buscar-socio" placeholder="Ingrese documento de identidad" required>
                         <div class="rfid-checkbox">
-                            <input type="checkbox" id="rfid-check" onchange="toggleSocioInputServicios()" name="rfid-check">
-                            <label for="rfid-check">RFDI</label>
+                            <input type="checkbox" id="rfid-check" name="rfid-check" checked>
+                            <label for="rfid-check">RFID</label>
                         </div>
                     </div>
                 </div>
@@ -62,6 +59,7 @@
                     <input type="text" id="nombre-socio" name="nombre-socio" placeholder="Nombre del socio" disabled>
                 </div>
 
+                <!-- Campo de valor del servicio -->
                 <div class="form-group">
                     <label for="valor-servicio">Valor del Servicio</label>
                     <div class="input-checkbox-group">
@@ -73,16 +71,13 @@
                     </div>
                 </div>
 
-
-
-
                 <!-- Módulo para agregar estancias -->
                 <div class="form-group">
                     <label for="cantidad-estancias">Cantidad de Estancias</label>
-                    <input type="number" value="1" id="cantidad-estancias" name="cantidad-estancias" min="1" placeholder="Ingrese cantidad" disabled>
+                    <input type="number" value="1" id="cantidad-estancias" name="cantidad-estancias" min="1" placeholder="Ingrese cantidad">
                 </div>
 
-
+                <!-- Campo de tipo de servicio -->
                 <div class="form-group">
                     <label for="tipo-servicio">Tipo de Servicio</label>
                     <select id="tipo-servicio" name="tipo-servicio" required>
@@ -92,19 +87,20 @@
                     </select>
                 </div>
 
+                <!-- Campo de fecha del servicio -->
                 <div class="form-group">
                     <label for="fecha-servicio">Fecha</label>
-                    <input type="date" id="fecha-servicio" name="fecha-servicio" value="" disabled>
+                    <input type="date" id="fecha-servicio" name="fecha-servicio" value="">
                 </div>
 
-
+                <!-- Botón para agregar servicio -->
                 <div class="form-group">
-                    <button type="submit" disabled>Agregar Servicio</button>
+                    <button type="submit">Agregar Servicio</button>
                 </div>
             </form>
         </div>
-
     </section>
+
 
     <section id="habitacion-fomento" class="hidden-section">
         <div class="form-container">
@@ -198,7 +194,7 @@
                 <!-- Campo de número de tarjeta -->
                 <div class="form-group">
                     <label for="numero-tarjeta">Número de Tarjeta</label>
-                    <input type="text" id="numero-tarjeta" name="numero-tarjeta" placeholder="Ingrese número de tarjeta">
+                    <input type="text" id="numero-tarjeta" name="numero-tarjeta" placeholder="Ingrese número de tarjeta" required>
                 </div>
 
                 <div class="form-group">

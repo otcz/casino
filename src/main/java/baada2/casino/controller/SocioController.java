@@ -1,5 +1,6 @@
 package baada2.casino.controller;
 
+import baada2.casino.entity.comida.ComidaDTO;
 import baada2.casino.entity.comida.TablaDTO;
 import baada2.casino.entity.socio.*;
 import baada2.casino.service.comida.ComidaService;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/socios")
@@ -78,7 +80,30 @@ public class SocioController {
         }
     }
 
-    @GetMapping("/consultarid")
+    @PostMapping("/consultarid")
+    public ResponseEntity<RegistrarServicioDTO> obtenerSocioAddServicio(@RequestBody RegistrarServicioDTO registrarServicioDTO) {
+        try {
+            RegistrarServicioDTO socio = socioService.obtenerSocioPorDocumento(registrarServicioDTO);
+            if (socio == null) {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND); // No se encontró el socio
+            }
+            ComidaDTO comidaDTO = new ComidaDTO();
+            comidaDTO.setCantidad(registrarServicioDTO.getCantidad());
+            comidaDTO.setClaseComida(registrarServicioDTO.getTipoServicio());
+            comidaDTO.setFecha(registrarServicioDTO.getFechaServicio());
+            comidaDTO.setPago(registrarServicioDTO.isPagado());
+            comidaDTO.setValorComida(registrarServicioDTO.getValorComida());
+            comidaDTO.setSocioId(Optional.ofNullable(socio.getDocumento())
+                    .filter(doc -> !doc.isEmpty())
+                    .orElse(socio.getIdCard()));
+            comidaDTO.setCostoFondosEstanciaId(registrarServicioDTO.getCostoFondosEstanciaId());
+            return new ResponseEntity<>(socio, HttpStatus.OK);
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error al obtener socio", e);
+        }
+    }
+
+    @GetMapping("/consultar-socio")
     public ResponseEntity<SocioDTO> obtenerSocioPorDocumento(@RequestParam("documento") String documento) {
         try {
             SocioDTO socio = socioService.obtenerSocioPorDocumento(documento);

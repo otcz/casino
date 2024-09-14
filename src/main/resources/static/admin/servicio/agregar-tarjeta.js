@@ -7,7 +7,7 @@ document.getElementById('buscar-btn3').addEventListener('click', function (event
         alert('Por favor ingrese un documento de identidad válido.');
         return;
     }
-    fetch(`/socios/consultarid?documento=${documentoIdentidad}`)
+    fetch(`/socios/consultar-socio?documento=${documentoIdentidad}`)
         .then(response => {
             if (!response.ok) {
                 throw new Error('Socio no encontrado');
@@ -58,7 +58,6 @@ document.getElementById('agregar-tarjeta-btn').addEventListener('click', functio
         .then(response => {
             if (response.ok) {
                 alert('Servicios actualizados exitosamente.');
-                // Aquí puedes actualizar la interfaz según sea necesario
             } else {
                 alert('Error al actualizar los servicios.');
             }
