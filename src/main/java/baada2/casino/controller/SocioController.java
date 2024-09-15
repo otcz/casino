@@ -97,6 +97,7 @@ public class SocioController {
                     .filter(doc -> !doc.isEmpty())
                     .orElse(socio.getIdCard()));
             comidaDTO.setCostoFondosEstanciaId(registrarServicioDTO.getCostoFondosEstanciaId());
+            comidaService.crearComida(comidaDTO);
             return new ResponseEntity<>(socio, HttpStatus.OK);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error al obtener socio", e);
