@@ -88,7 +88,7 @@ public class ComidaService {
         // Obtenemos todas las comidas del socio (incluidas las pagadas)
         List<ComidaEntity> comidas = comidaRepository.findBySocio(socio);
         if (!comidas.isEmpty()) {
-            Map<LocalDate, List<Integer>> comidasPorFecha = new TreeMap<>(Collections.reverseOrder()); // Orden descendente
+            Map<LocalDate, List<Integer>> comidasPorFecha = new TreeMap<>();
             double totalEstancias = 0;
             double totalExtra = 0;
             double totalEstanciasPagadas = 0;
