@@ -131,8 +131,12 @@ public class SocioController {
     }
 
     @GetMapping("/comida/{documento}")
-    public ResponseEntity<TablaDTO> obtenerComidasPorSocio(@PathVariable String documento) {
-        TablaDTO comidas = comidaService.obtenerComidasPorSocio(documento);
+    public ResponseEntity<TablaDTO> obtenerComidasPorSocio(
+            @PathVariable String documento,
+            @RequestParam(required = false) String fecha) {
+
+        TablaDTO comidas = comidaService.obtenerComidasPorSocioYFecha(documento, fecha);
         return ResponseEntity.ok(comidas);
     }
+
 }

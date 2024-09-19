@@ -81,14 +81,17 @@ public class ComidaService {
         return comidaDTO;
     }
 
-    public TablaDTO obtenerComidasPorSocio(String documento) {
+    public TablaDTO obtenerComidasPorSocioYFecha(String documento, String fecha) {
         SocioEntity socio = socioRepository.findByDocumento(documento).orElseThrow(() -> new RuntimeException("Socio no encontrado con documento: " + documento));
-
-
+        LocalDate fechaCorte = LocalDate.parse(fecha);
+        LocalDate fechaInicio = fechaCorte.minusMonths(1);
+        fechaInicio = fechaInicio.withDayOfMonth(21);
+        System.out.println(fechaInicio+" fechaInicio");
+        System.out.println(fechaCorte+" fechaCorte");
         // Obtenemos todas las comidas del socio (incluidas las pagadas)
-        List<ComidaEntity> comidas = comidaRepository.findBySocio(socio);
+        List<ComidaEntity> comidas = comidaRepository.findBySocioAndFechaBetween(socio,fechaInicio,fechaCorte);
         if (!comidas.isEmpty()) {
-            Map<LocalDate, List<Integer>> comidasPorFecha = new TreeMap<>();
+            Map<LocalDate, List<Integer>> comidasPorFecha = new TreeMap<>(Collections.reverseOrder()); // Orden descendente
             double totalEstancias = 0;
             double totalExtra = 0;
             double totalEstanciasPagadas = 0;

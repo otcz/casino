@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     const socioDocumento = sessionStorage.getItem("documento");
-
-    fetch(`/socios/comida/${socioDocumento}`)
+    const currentMonthElement = document.getElementById("currentMonth");
+    fetch(`/socios/comida/${socioDocumento}?fecha=${obtenerFechaActual()}`)
         .then(response => response.json())
         .then(data => {
             // Verificar si 'fecha' existe en la respuesta
@@ -78,3 +78,17 @@ document.addEventListener("DOMContentLoaded", function () {
         })
         .catch(error => console.error('Error al obtener las comidas:', error));
 });
+
+function obtenerFechaActual() {
+    // Obtener la fecha y hora actuales
+    const ahora = new Date();
+
+    // Obtener el año, mes y día
+    const año = ahora.getFullYear();
+    const mes = String(ahora.getMonth() + 1).padStart(2, '0'); // getMonth() devuelve el mes de 0 (Enero) a 11 (Diciembre)
+    const día = String(ahora.getDate()).padStart(2, '0'); // Asegura que el día tenga dos dígitos
+
+    // Formatear la fecha en yyyy-MM-dd
+    return `${año}-${mes}-${día}`;
+}
+
