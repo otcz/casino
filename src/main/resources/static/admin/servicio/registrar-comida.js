@@ -71,7 +71,7 @@ async function consultarCostoFondosEstancia() {
         costos = data;
         return data;
     } catch (error) {
-        alert("Se debe configurar el valor de cada comida")
+        alert("Se debe configurar el valor de cada comida para la fecha"+mesAnio)
         console.error('Error al consultar costos fondos estancia:', error);
         return null;
     }
