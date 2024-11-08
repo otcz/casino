@@ -25,28 +25,34 @@ public class CostoFondosEstanciaEntity {
     private Long id;
 
     @Column(name = "fondo_casino", nullable = false)
-    private double fondoCasino=0;
+    private double fondoCasino = 0;
 
     @Column(name = "fomento", nullable = false)
-    private double fomento=0;
+    private double fomento = 0;
 
     @Column(name = "fondo_habitacional", nullable = false)
-    private double fondoHabitacional=0;
+    private double fondoHabitacional = 0;
 
     @Column(name = "desayuno", nullable = false)
-    private double desayuno=0;
+    private double desayuno = 0;
 
     @Column(name = "almuerzo", nullable = false)
-    private double almuerzo=0;
+    private double almuerzo = 0;
 
     @Column(name = "cena", nullable = false)
-    private double cena=0;
+    private double cena = 0;
 
     @Column(name = "estancia", nullable = false)
-    private double estancia=0;
+    private double estancia = 0;
 
-    @Column(name = "especial", nullable = false)
-    private double especial=0;
+    @Column(name = "desayuno_especial", nullable = false)
+    private double DesayunoEspecial = 0;
+
+    @Column(name = "almuerzo_especial", nullable = false)
+    private double AlmuerzoEspecial = 0;
+
+    @Column(name = "cena_especial", nullable = false)
+    private double CenaEspecial = 0;
 
     @Column(name = "fecha", nullable = false, unique = true)  // También puedes usar unique = true aquí
     private String fecha;
